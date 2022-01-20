@@ -1,0 +1,6 @@
+[submodule "Tools/kmake_bin"]
+	path = Tools/kmake_bin
+	url = https://github.com/Kode/kmake_bin.git
+[submodule "Tools/kraffiti"]
+	path = Tools/kraffiti
+	url = https://github.com/Kode/kraffiti_bin.git
