@@ -36,11 +36,7 @@ int String_is_palindrome(String* s)
 	int temp = s->lenght -1;
 	for (int i = 0; i < s->lenght; i++)
 	{
-		if (s->characters[i] == s->characters[temp])
-		{
-
-		}
-		else
+		if (s->characters[i] != s->characters[temp])
 		{
 			return 0;
 		}
