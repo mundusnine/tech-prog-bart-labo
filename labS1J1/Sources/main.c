@@ -120,7 +120,8 @@ void test_code(FILE* f) {
 				printf("Tu as un erreur dans: set_String !\n");
 			}
 			isGood += String_is_palindrome(&str);
-			if (ligneCount == 4 && isGood > 1) {
+			printf("%s", str.characters);
+			if (ligneCount == 4 && isGood == 1) {
 				printf("Tu as bien programmer: String_is_palindrome !\n");
 			}
 			else {
