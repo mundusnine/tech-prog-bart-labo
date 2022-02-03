@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "labo.h"
+
+void insertionSort(int elements[], int n){
+	for (int i = 1; i < n; i++)
+	{
+		int y = i;
+		while (y > 0 && elements[y] < elements[y - 1])
+		{
+			int temp = elements[y];
+			elements[y] = elements[y - 1];
+			elements[y - 1] = temp;
+			y--;
+		}
+	}
+}
+
+void quickSort(int* elements, int left, int right) {
+	if (left >= right) { return; }
+	int L = left, R = right;
+	int pivot = elements[(left + right) / 2];
+	while (left <= right) {
+		while (elements[left] < pivot) {
+			left++;
+		}
+		while (elements[right] > pivot) {
+			right--;
+		}
+		if (left <= right) {
+			elements[left] = elements[right];
+			elements[right] = elements[left];
+			left++; right--;
+		}
+	}
+	int index = left;
+	quickSort(elements, L, index - 1);
+	quickSort(elements, index, R);
+}
