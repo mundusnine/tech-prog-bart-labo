@@ -110,6 +110,7 @@ void test_code(FILE* f) {
 		}
 		else if (ligneCount <= 4) {
 			static size_t isGood = 0;
+			isGood = 0;
 			strcpy(lastLine, ligne);
 			lastLine[strlen(lastLine) - 1] = '\0';
 			set_String(lastLine, &str);

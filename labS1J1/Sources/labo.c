@@ -7,10 +7,12 @@
 
 char* sousTexte(char* texte, int from, int to)
 {
-	char SText[256] = {0};
+	int x = 0;
+	char SText[100] = {0};
 	for (int i = from; i < to; i++)
 	{
-		SText[i] = texte[i];
+		SText[x] = texte[i];
+		x++;
 	}
 	return SText;
 }
@@ -28,19 +30,15 @@ void set_String(char* text, String* s)
 
 int String_is_palindrome(String* s)
 {
-	int x = 0;
+	int PalindromeVerif = 1;
 	for (int i = 0; i < s->length; i++)
 	{
-		if (s->characters[i] == s->characters[s->length - i])
+		if (s->characters[i] != s->characters[s->length - 1 - i])
 		{
-			x++;
+			PalindromeVerif = 0;
 		}
 	}
-	if (x >= s->length / 2)
-	{
-		return 1;
-	}
-	return 0;
+	return PalindromeVerif;
 }
 
 
