@@ -1,0 +1,9 @@
+L9 = O(n)
+L10 = O(n)
+L12 = O(k)
+L15 = O(n)
+L19 = O(k)
+L24 = O(k)
+
+
+Total = O(n+k)
