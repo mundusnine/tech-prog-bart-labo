@@ -1,0 +1,20 @@
+exercice 0 :
+5 : O(n)
+rep : O(n)
+
+exercice 1 : 
+10 : O(n)
+13 : O(n)
+rep : O(n^2)
+
+exercice 2 :
+12 : O(n)
+15 : O(k)
+19 : O(n)
+24 : O(n)
+rep : O(n + k)
+
+exercice 3 :
+9 : O(n)
+10 : O(n)
+rep : O(n)
