@@ -1,0 +1,5 @@
+L12 = O(n)
+l15 = O(k) 
+l19 = O(n)
+l24 = O(n)
+Total = O(n + k)

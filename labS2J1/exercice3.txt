@@ -1,0 +1,3 @@
+l9 = O(n)
+l10 = O(n)
+total = O(n)
