@@ -1,0 +1,3 @@
+ligne 05: for(int i = length; i >= 0;) = O(n)
+
+Total   :			       = O(n)

@@ -1,0 +1,12 @@
+int subSearch(int* arr,int n, int key, int start){
+
+  if(start >= n) return -1;
+  if(start > -1 && arr[start] == key){
+      return start;
+  }
+
+
+ligne 09: int a = subSearch(arr,n,key,start+2);  = O(n)
+ligne 10: int b = subSearch(arr,n,key,start+1);  = O(n)
+
+Total: 						 = O(2n) donc O(n)
