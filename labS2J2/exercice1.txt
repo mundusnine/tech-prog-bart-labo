@@ -1,0 +1,4 @@
+l6 = O(n)
+l17 = O(k)
+l21 = O(q * n * (s*j))
+total = O(q * n * (s*j))

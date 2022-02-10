@@ -1,0 +1,6 @@
+l13 = O(n)
+l15 = O(k)
+l21 = O(n*k)
+l33 = O(n)
+l39 = O(k)
+total = O(n*k)

@@ -1,0 +1,3 @@
+l6 = O(n)
+l21 = O(n)
+total = O(n)
