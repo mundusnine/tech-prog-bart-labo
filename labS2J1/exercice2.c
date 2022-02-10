@@ -6,22 +6,22 @@ void sort(int arr[], int length)
 {
     int output[256];
 
-    int count[RANGE + 1], i;
+    int count[RANGE + 1], i; //declare tab [10] et var i
     memset(count, 0, sizeof(count) * (RANGE + 1));
 
-    for (i = 0; arr[i]; ++i)
+    for (i = 0; arr[i]; ++i) // O(n)
         ++count[arr[i]];
 
-    for (i = 0; i <= RANGE; ++i){
+    for (i = 0; i <= RANGE; ++i){ // O(k)
         count[i] += count[i - 1];
     }
 
-    for (i = 0; arr[i]; ++i) {
+    for (i = 0; arr[i]; ++i) { // O(n)
         output[count[arr[i]] - 1] = arr[i];
         --count[arr[i]];
     }
 
-    for (i = 0; arr[i]; ++i){
+    for (i = 0; arr[i]; ++i){ // O(n)
         arr[i] = output[i];
     }
         

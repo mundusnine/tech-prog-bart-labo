@@ -1,11 +1,11 @@
 #include <stdio.h>
 
 void sort(int* arr,int length){
-    int y = 0;
-    for(int i = length; i >= 0;){
-        arr[y] = arr[--i];
-        if(i < 0){
-            printf(stderr,"Something went wrong...");
+    int y = 0; // O(1)
+    for(int i = length; i >= 0;){ // O(n)
+        arr[y] = arr[--i]; // O(1)
+        if(i < 0){ // O(1)
+            printf(stderr,"Something went wrong..."); // O(1)
         }
         ++y;
     }

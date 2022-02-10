@@ -7,10 +7,10 @@ void sort(int arr[], int n)
     int y;
     int id_minimum;
 
-    for (i = 0; i < n-1; ++i)
+    for (i = 0; i < n-1; ++i) // O(n)
     {
-        id_minimum = i;
-        for (y = i+1; y < n; ++y){
+        id_minimum = i; // 0, 
+        for (y = i+1; y < n; ++y){ // O(n)
             if (arr[y] < arr[id_minimum])
                 id_minimum = y;
         }
