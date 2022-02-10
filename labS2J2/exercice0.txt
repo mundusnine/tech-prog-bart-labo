@@ -1,0 +1,15 @@
+L13 = O(n)
+L15 = O(n)
+L21 = O(n)
+L33 = O(n)
+L39 = O(n)
+
+
+
+L52 = O(log(q))
+L53 = O(log(q))
+L55 = O(n log(q))
+
+
+
+Total = O(n log(n))

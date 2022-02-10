@@ -1,0 +1,10 @@
+L6 = O(n)
+
+
+L17 = O(n)
+L22 = O(q)
+L25 = O(n)
+L31 = O(q)
+
+
+Total = O(qn)
