@@ -1,0 +1,4 @@
+A partir du dossier principal -> D:\FrancisLemay\tech-prog-bart-labo\Tools\kmake_bit\kmake.exe --from ./labS1J2 -v vs2019
+
+
+													Bonne semaine

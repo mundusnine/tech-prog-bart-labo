@@ -148,6 +148,7 @@ void test_code(FILE* f) {
 			}
 			if (ligneCount == 6) {
 				static int isGood = 1;
+				//printf("Numbers = %d", &numbers); Ignorer
 				bubbleSort(numbers, num_len);
 				for (int i = 0; i < num_len; ++i) {
 					if (numbers[i] != sorted_nums[i]) {
