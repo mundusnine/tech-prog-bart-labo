@@ -53,12 +53,12 @@ void bubbleSort(int elements[], int n)
 	for (int i = 0; i < n - 1; i++)
 	{
 		if(elements[i] > elements[i+1])
-			{
-				int temp = elements[i];
-				elements[i] = elements[i + 1];
-				elements[i + 1] = temp;
-				condition = 1;
-			}
+		{
+			int temp = elements[i];
+			elements[i] = elements[i + 1];
+			elements[i + 1] = temp;
+			condition = 1;
+		}
 		if (i == n - 2 && condition)
 		{
 			i = -1;
