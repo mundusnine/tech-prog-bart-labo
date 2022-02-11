@@ -21,25 +21,14 @@ void insertionSort(int elements[], int n)
 }
 
 void quickSort(int* elements, int left, int right) {
-
-	int show = right; // Pour print 
-	for (int i = 0; i < show; i++)
+	if (left >= right)
 	{
-		printf("%d\n", elements[i]);
+		return;
 	}
-	printf("Left = %d, Right = %d\n", left, right);
-	printf("===========================================\n");
-	
-	
-
-
-
-	int pivot = elements[(left + right) / 2];
-	printf("Pivot %d\n", pivot); // run 1 = 682
-	// left = 0 right = 7
 
 	int l = left;
 	int r = right;
+	int pivot = elements[(left + right) / 2];
 
 	while (left <= right)
 	{
@@ -51,8 +40,6 @@ void quickSort(int* elements, int left, int right) {
 		{
 			right--;
 		}
-
-		//left = 3 right = 7
 		if (left <= right)
 		{
 			int temp = elements[left];
@@ -61,29 +48,14 @@ void quickSort(int* elements, int left, int right) {
 			left++;
 			right--;
 		}
-		// 4 6
 
 	}
-
-
-	
-	printf("Left = %d, Right = %d\n", left, right);
-	
-	if (left >= right)
-	{
-		for (int i = 0; i < show; i++)
-		{
-			printf("%d\n", elements[i]);
-		}
-
-		return;
-	}
-
-
-
 	int index = left;
+
 	quickSort(elements, l, index - 1);
+
 	quickSort(elements, index, r);
+
 
 
 }
