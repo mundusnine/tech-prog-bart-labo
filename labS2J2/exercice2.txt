@@ -1,0 +1,6 @@
+L6 = O(n)
+
+
+L13 = O(n)
+
+Result : O(n)
