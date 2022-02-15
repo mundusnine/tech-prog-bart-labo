@@ -1,0 +1,22 @@
+exercice 0
+13 : O(n)
+15 : O(n)
+21 : O(n)
+33 : O(n)
+39 : O(n)
+52 : O(log n)
+53 : O(log n)
+rep : O(n log n)
+
+exercice 1
+6 : O(n)
+22 : O(n)
+25 : O(n)
+31 : O(n)
+32 : O(k)
+rep : O(n * k)
+
+exercice 2 
+6 : O(n)
+21 : O(n)
+rep : O(n)

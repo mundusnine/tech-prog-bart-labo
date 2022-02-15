@@ -3,7 +3,7 @@
 
 size_t strlen(char* str){
     size_t i = 0;
-    while(str[i] != '\0'){
+    while(str[i] != '\0'){//O(n)
         ++i;
     }
     return i;
@@ -18,7 +18,7 @@ int main()
     size_t len = strlen(str);
    while(1){
        int i = 0;
-       while(str[i] != ' '){
+       while(str[i] != ' '){//O(n)
            sub[i] = str[i];
            if(strlen(sub) >= len){
                break;
