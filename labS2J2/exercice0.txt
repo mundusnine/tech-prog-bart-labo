@@ -1,0 +1,6 @@
+21 O(n)
+52 O(log n)
+53 O(log n)
+55 O(n)
+
+Total O(n log n)
