@@ -1,4 +1,4 @@
 l6 = O(n)
 l17 = O(k)
-l21 = 
-total = 
+l21 = O(n*k)
+total = O(n*k)
