@@ -1,0 +1,14 @@
+Ligne 13 : for (i = 0; i < n1; i++)
+		Left[i] = arr[left + i];	=O(n)
+
+Ligne 15 : for (j = 0; j < n2; j++)
+		Right[j] = arr[m + 1 + j];	=O(n)
+
+
+Ligne 21 : while (i < n1 && j < n2) {		=O(n)
+
+Ligne 33 : while (i < n1) {			=O(n)
+
+Ligne 39 : while (j < n2) {			=O(n)
+
+Total :						=O(5n) donc O(n) 
