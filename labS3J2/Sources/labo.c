@@ -27,3 +27,20 @@ void insertTail(Node* head, void* newData)
 	newNode->prev = head->prev;
 	newNode->next = head;
 }
+/*
+* Créer un noeud et l'ajouter après le noeud head. Si le noeud head est vide(data) lui donner la nouvelle valeur passer.
+*/
+void insertHead(Node* head, void* newData)
+{
+	if (head->data != NULL)
+	{
+		Node* newNode = allocate(sizeof(Node));
+		newNode->data = newData;
+		newNode->prev = head;
+		newNode->next = head->next;
+	}
+	else
+	{
+		head->data = newData;
+	}
+}
