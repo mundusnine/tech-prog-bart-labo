@@ -106,7 +106,6 @@ void sort(Node* head)
 				head = currNode;
 			}
 		}
-		//      1         2  
 		previousNode = currNode;
 		currNode = currNode->next;
 		i++;

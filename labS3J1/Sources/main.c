@@ -241,7 +241,6 @@ int main(int argc, char** argv) {
 			verify_sort(input);
 		}
 	}
-	
 
 	if(input != NULL)
 		fclose(input);
