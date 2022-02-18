@@ -2,8 +2,8 @@
 #include <assert.h>
 
 #define HEAP_SIZE 1024 * 1024
-static uint8_t* heap = NULL;
-static size_t heap_top = 0;
+extern uint8_t* heap;
+extern size_t heap_top;
 
 static void* allocate(size_t size) {
 	size_t old_top = heap_top;
