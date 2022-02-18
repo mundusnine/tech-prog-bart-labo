@@ -22,5 +22,8 @@ void insert(Node* currNode, void* newData)
 */
 void insertTail(Node* head, void* newData)
 {
-	
+	Node* newNode = allocate(sizeof(Node));
+	newNode->data = newData;
+	newNode->prev = head->prev;
+	newNode->next = head;
 }
