@@ -70,3 +70,6 @@ Node* removeNode(Node* currNode)
 
 	return DeletedNode;
 }
+
+void alphabetise(Node* head, char* names[])
+{}
