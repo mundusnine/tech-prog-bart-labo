@@ -47,6 +47,10 @@ void insertHead(Node* head, void* newData)
 		newNode->prev = head;
 		newNode->next = head->next;
 		head->next = newNode;
+		if (head->prev == NULL)
+		{
+			head->prev = newNode;
+		}
 	}
 	else
 	{
@@ -59,16 +63,16 @@ void insertHead(Node* head, void* newData)
 */
 Node* removeNode(Node* currNode)
 {
-	Node* DeletedNode = currNode;
+	Node* RemoveNode = currNode;
 	Node* PreviousNode = currNode->prev;
 	Node* NextNode = currNode->next;
 
-	DeletedNode->next = NULL;
-	DeletedNode->prev = NULL;
+	RemoveNode->next = NULL;
+	RemoveNode->prev = NULL;
 	PreviousNode->next = NextNode;
 	NextNode->prev = PreviousNode;
 
-	return DeletedNode;
+	return RemoveNode;
 }
 
 void alphabetise(Node* head, char* names[])
