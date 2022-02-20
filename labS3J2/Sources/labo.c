@@ -47,6 +47,7 @@ void insertHead(Node* head, void* newData)
 		newNode->prev = head;
 		newNode->next = head->next;
 		head->next = newNode;
+		//Init pour la premiere fois le head.prev
 		if (head->prev == NULL)
 		{
 			head->prev = newNode;
