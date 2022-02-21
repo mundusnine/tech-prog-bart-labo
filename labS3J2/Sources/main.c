@@ -151,17 +151,22 @@ int test_code(FILE* f) {
 		out = -1;
 	}
 	char* names[128] = { 0 };
-	//		alphabetise(&head, names);
-	//		for (int i = 1; i < num_persons; ++i) {
-	//			if ((int)names[i - 1][0] > (int)names[i][0] || ((int)names[i - 1][1] > (int)names[i][1] && (int)names[i - 1][0] == (int)names[i][0])) {
-	//				fprintf(stderr, "Alphabetise failed to order the names\n");
-	//				for (int y = 0; y < num_persons; ++y) {
-	//					fprintf(stderr, "Name index %i name %s\n",y,names[y]);
-	//				}
-	//				out = -1;
+	
+	
+	
+	//	J'ai effectuer le sort de la premiere partie du la donc comme discuter en classe je n'ai pas fait le alphabtise
+	// 
+	// alphabetise(&head, names);
+	//	for (int i = 1; i < num_persons; ++i) {
+	//		if ((int)names[i - 1][0] > (int)names[i][0] || ((int)names[i - 1][1] > (int)names[i][1] && (int)names[i - 1][0] == (int)names[i][0])) {
+	//			fprintf(stderr, "Alphabetise failed to order the names\n");
+	//			for (int y = 0; y < num_persons; ++y) {
+	//				fprintf(stderr, "Name index %i name %s\n",y,names[y]);
 	//			}
+	//			out = -1;
 	//		}
-}
+	//	}
+}	
 
 int main(int argc, char** argv) {
 	heap = (uint8_t*)malloc(HEAP_SIZE);
