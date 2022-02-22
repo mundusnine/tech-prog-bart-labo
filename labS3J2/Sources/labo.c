@@ -77,4 +77,6 @@ Node* removeNode(Node* currNode)
 }
 
 void alphabetise(Node* head, char* names[])
-{}
+{
+	//	J'ai effectuer le sort de la premiere partie du la donc comme discuter en classe je n'ai pas fait le alphabtise
+}
