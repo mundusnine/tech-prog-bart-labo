@@ -66,7 +66,7 @@ Node* removeByData(Node* head, void* rmData)
 			previous->next = cpy->next; // Bridge entre les nodes qui seront séparés
 
 			memset(cpy, 0, sizeof(Node));
-			return previous;
+			goto lol;
 		}
 
 		if (prev >= 0) // Tout le temps
@@ -77,8 +77,8 @@ Node* removeByData(Node* head, void* rmData)
 
 		prev++;
 	}
-	
-
+	lol:
+	return previous;
 }
 
 /*
@@ -103,7 +103,7 @@ Node* removeByName(Node* head, char* name)
 
 			previous->next = cpy->next; // bridge
 			memset(cpy, 0, sizeof(cpy));
-			return previous;
+			break;
 		}
 
 		previous = cpy;
@@ -113,7 +113,7 @@ Node* removeByName(Node* head, char* name)
 	}
 
 
-	
+	return previous;
 }
 
 
