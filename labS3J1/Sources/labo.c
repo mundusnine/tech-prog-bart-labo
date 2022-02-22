@@ -103,7 +103,7 @@ Node* removeByName(Node* head, char* name) //le data dans Node est une personne 
 */
 void sort(Node* head)
 {
-	Node* n = head;
+	/*Node* n = head;
 	Person* p = n->data;
 	int nbElements = 0;
 
@@ -120,5 +120,5 @@ void sort(Node* head)
 	{
 		int y = i;
 		while(y > 0 && )
-	}
+	}*/
 }

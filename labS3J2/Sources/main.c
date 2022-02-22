@@ -146,7 +146,7 @@ int test_code(FILE* f) {
 		fprintf(stderr, "Insertion at Tail failed\n");
 		out = -1;
 	}
-	char* names[128] = { 0 };
+	/*char* names[128] = {0};
 	alphabetise(&head, names);
 	for (int i = 1; i < num_persons; ++i) {
 		if ((int)names[i - 1][0] > (int)names[i][0] || ((int)names[i - 1][1] > (int)names[i][1] && (int)names[i - 1][0] == (int)names[i][0])) {
@@ -156,13 +156,12 @@ int test_code(FILE* f) {
 			}
 			out = -1;
 		}
-	}
+	}*/
 }
 
 int main(int argc, char** argv) {
 	heap = (uint8_t*)malloc(HEAP_SIZE);
 	assert(heap != NULL);
-	
 	int result = 0;
 	FILE* input = fopen("test_input.txt","r");
 	if (input != NULL) {

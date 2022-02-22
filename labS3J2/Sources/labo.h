@@ -16,6 +16,15 @@ static void* allocate(size_t size) {
 * Déclarer une structure de donnée appeler Node qui est un noeud d'une liste doublement chaînée.
 */
 
+typedef struct Node Node;
+
+struct Node
+{
+	Node* prev;
+	void* data;
+	Node* next;
+};
+
 typedef struct person_t {
 	char name[256];
 	size_t age;
@@ -45,4 +54,4 @@ Node* removeNode(Node* currNode);
 /*
 * Ajouter dans le tableau le nom de chacun en ordre alphabétic. Par simplicité, considérer seulement les deux première lettre.
 */
-void alphabetise(Node* head, char* names[]);
+//void alphabetise(Node* head, char* names[]);
