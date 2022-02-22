@@ -46,11 +46,13 @@ Node* removeByData(Node* head, void* rmData)
 
 Node* removeByName(Node* head, char* name)
 {
+	
 	Node* n = head;
 	Node* previousNode;
 	while (n != NULL)
 	{
-		if (n->data == name)
+		Person* p = n->data;
+		if (p->name == name)
 		{
 			memset(n, 0, sizeof(Node));
 			return previousNode;
@@ -60,23 +62,23 @@ Node* removeByName(Node* head, char* name)
 	}
 }
 
+
 void sort(Node* head)
 {
-	Person* p = head->data;
+	Person* p;
+	Person* p2;
 	Node* n = head;
 	Node* previousNode = n;
-	int young;
-	young = p->age;
 	while (n != NULL)
 	{
-
-		if (young < p->age)
+		p = previousNode->data;
+		p2 = n->data;
+		if (p2->age > p->age)
 		{
-			swap(previousNode, n);
-			p = n->data;
+			swap(n, previousNode);
+			previousNode = n;
+			n = n->next;
 		}
-		previousNode = n;
-		n = n->next;
 	}
 }
 
