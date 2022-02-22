@@ -57,13 +57,13 @@ Node* removeByData(Node* head, void* rmData)
 		// Si data == data head
 		if (cpy->data == rmData && prev == 0)
 		{
-			printf("La data recherche est dans le head\n");
 			memset(head, 0, sizeof(Node)); // Efface le head
 			return 0;
 		}
 		// Si data != data-> head
 		else if (cpy->data == rmData && prev > 0)
 		{
+			previous->next = cpy->next; // Bridge entre les nodes qui seront séparés
 
 			memset(cpy, 0, sizeof(Node));
 			return previous;
@@ -92,26 +92,28 @@ Node* removeByName(Node* head, char* name)
 	Node* previous;
 	Node* cpy = head;
 	Person* p;
-
+	int count = 0;
 
 	while (cpy != NULL)
 	{
-		p = cpy;
+		p = cpy->data;
 
-		if (p->name == name)
+		if (p->name == name && count > 0) // Ignore le header puisque impossible de return previous
 		{
+
+			previous->next = cpy->next; // bridge
 			memset(cpy, 0, sizeof(cpy));
-			return previous;  // Si header == node recherché, erreur puisque previous est vide Sinon OK
+			return previous;
 		}
 
 		previous = cpy;
 		cpy = cpy->next;
 
-
+		count++;
 	}
 
 
-
+	
 }
 
 
