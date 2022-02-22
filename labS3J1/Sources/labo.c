@@ -15,26 +15,30 @@
 // Param currNode = Noeud    Param newData = Data du noeud
 void insert(Node* currNode, void* newData)
 {
-	Node* un = allocate(sizeof(Node));  // Pourquoi *
-	un->data = newData;
-	currNode->next = un;
+	Node* NewNode = allocate(sizeof(Node));  // Allocation d'espace mémoire de la taille d'un Node
+	NewNode->data = newData;  // Enregistrement des données passées en parametre dans un.data
+	currNode->next = NewNode;  // CurrentNode.next prend la valeur de l'adresse de la nouvelle node
 
-	un->next = NULL;
+	NewNode->next = NULL; // L'adresse next du node devient NULL, puisqu'elle pointe vers rien
 
 }
 
 /*
 * Cr�er un noeud et l'ajouter apr�s le noeud head. Si le noeud head est vide(data) lui donner la nouvelle valeur passer.
 */
-void insertHead(Node* head, void* newData)
+void insertHead(Node* head, void* newData) // Node* Head = Le premier Node dans la liste   
 {
-	Node* deux = allocate(sizeof(Node));
-	head->next = deux;
+	Node* NewNode = allocate(sizeof(Node)); // Allocate espace
+	NewNode->next = head->next;  // NewNode->next pointe ce que le header pointais
+	head->next = NewNode; // Le header pointe maintenant vers NewNode
 	if (head->data == NULL)
 	{
-		head->data = newData; 
-	}  // PROBLEME
-	// ELSE ..
+		head->data = newData;
+	}  
+	else
+	{
+		NewNode->data = newData;
+	}
 }
 
 /*
@@ -51,7 +55,7 @@ Node* removeByData(Node* head, void* rmData)
 	{
 
 		// Si data == data head
-		if (cpy->data == rmData && prev > 0)
+		if (cpy->data == rmData && prev == 0)
 		{
 			printf("La data recherche est dans le head\n");
 			memset(head, 0, sizeof(Node)); // Efface le head
@@ -65,11 +69,10 @@ Node* removeByData(Node* head, void* rmData)
 			return previous;
 		}
 
-		if (prev > 0)
+		if (prev >= 0) // Tout le temps
 		{
-			cpy = cpy->next;
 			previous = cpy;
-
+			cpy = cpy->next;
 		}
 
 		prev++;
@@ -86,28 +89,28 @@ When name = Node->data, return previous node
 */
 Node* removeByName(Node* head, char* name)
 {
-	Node* cpy = head;
 	Node* previous;
+	Node* cpy = head;
+	Person* p;
 
-	int prev = 0;
-	while (cpy->next != NULL)
+
+	while (cpy != NULL)
 	{
+		p = cpy;
 
-
-		if (cpy->data == name)
+		if (p->name == name)
 		{
-			return previous;
+			memset(cpy, 0, sizeof(cpy));
+			return previous;  // Si header == node recherché, erreur puisque previous est vide Sinon OK
 		}
 
-		if (prev > 0)
-		{
-			cpy = cpy->next;
+		previous = cpy;
+		cpy = cpy->next;
 
-		}
-		prev++;
+
 	}
 
-	
+
 
 }
 
@@ -115,5 +118,8 @@ Node* removeByName(Node* head, char* name)
 /*
 * Trier par l'�ge. Utiliser l'algorithme que vous connaissez le mieux.
 */
-void sort(Node* head) {
+void sort(Node* head) 
+{
+
+
 }
