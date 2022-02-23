@@ -73,7 +73,7 @@ Node* removeNode(Node* currNode)
 	PreviousNode->next = NextNode;
 	NextNode->prev = PreviousNode;
 
-	return RemoveNode;
+	return RemoveNode; //toujours un bug que je ne suis pas parvenu a patch ........ (doit probablement etre ultra simple mais je ne le vois juste pas)
 }
 
 void alphabetise(Node* head, char* names[])
