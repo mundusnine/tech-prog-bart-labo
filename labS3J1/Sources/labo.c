@@ -66,7 +66,7 @@ Node* removeByName(Node* head, char* name)
 		if (p->name == name)
 		{
 			memset(supprime, 0, sizeof(Node));
-			
+
 			if (nodeReturn == supprime)
 			{
 				return nodeReturn->next;
@@ -104,23 +104,30 @@ void sort(Node* head)
 
 	for (int i = 0; i < nombreElement; i++)
 	{
-		Node* element = head;
-		Node* nextElement = head->next;
-		while (nextElement != NULL)
+		int a = 0;
+
+		Node* element1 = head;
+		Node* element2 = element1->next;
+
+		while (a < nombreElement - i - 1)
 		{
-			Person* pElement = (Person*)element->data;
-			Person* pNextElement = (Person*)nextElement->data;
-	
-			if (pElement->age < pNextElement->age)
+			Person* person1 = element1->data;
+			Person* person2 = element2->data;
+			if (person1->age > person2->age)
 			{
-				Node* temp = element;
-				element->data = nextElement->data;
-				nextElement->data = temp->data;
+				Node temp1 = *element1;
+				Node temp2 = *element2;
+
+				*element1 = temp2;
+				*element2 = temp1;
+				element2->next = temp2.next;
+				element1->next = element2;
 			}
-	
-			element = element->next;
-			nextElement = nextElement->next;
+
+			element1 = element1->next;
+			element2 = element2->next;
+			a++;
 		}
 	}
-	
+
 }
