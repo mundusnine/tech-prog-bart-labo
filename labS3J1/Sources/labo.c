@@ -23,31 +23,36 @@ void insertHead(Node* head, void* newData) {
 }
 
 Node* removeByData(Node* head, void* rmData) {
+	Node* n = head;
 	int i = 0;
-	Node* n;
-	int x = sizeof(Node) - 1;
-
-	while (head != NULL) {
+	while (head->next != NULL) {
 		if (head->data == rmData) {
 			memset(head, 0, sizeof(Node));
 			return n;
 		}
 		head = head->next;
-
+		i++;
+		if (i >= 1)
+		{
+			n = n->next;
+		}
 	}
-
 }
 
 Node* removeByName(Node* head, char* name) {
-
 	Person* p = head->data;
-
+	int i = 0;
 	while (head != NULL) {
 		if (p == name) {
 			memset(p, 0, sizeof(Node));
 			return head->next - 1;
 		}
 		head = head->next;
+		i++;
+		if (i >= 1)
+		{
+			
+		}
 	}
 
 }
