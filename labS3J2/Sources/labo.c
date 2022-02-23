@@ -14,8 +14,9 @@ void insertTail(Node* head, void* newData)
 	Node* n = allocate(sizeof(Node));;
 	if (head != NULL)
 	{
-		head->prev->next = n;
-
+		head->prev->next = head;
+		head->prev = n;
+		head->prev->prev = head;
 		n = newData;
 		n->prev = head;
 	}
