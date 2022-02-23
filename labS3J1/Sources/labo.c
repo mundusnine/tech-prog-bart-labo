@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-
 /*
 * Cr�er un noeud et l'ajouter apr�s le noeud currNode. Utiliser la fonction allocate pour allouer de la m�moire.
 */
@@ -19,17 +17,15 @@ void insert(Node* currNode, void* newData)
 */
 void insertHead(Node* head, void* newData)
 {
+	Node* n = allocate(sizeof(Node));
+
 	if (head->data == NULL)
 	{
 		head->data = newData;
 	}
-	else
-	{
-		Node* n = allocate(sizeof(Node));
-		n->data = newData;
-		n->next = NULL;
-		head->next = n;
-	}
+
+	head->next = n;
+	n->next = NULL;
 }
 
 /*
@@ -40,13 +36,9 @@ Node* removeByData(Node* head, void* rmData)
 {
 	Node* n = head;
 	Node* previousNode = head;
-	int iterator = 1;
+	
 	while (n != NULL)
 	{
-		if (iterator > 2)
-		{
-			previousNode = previousNode->next;
-		}
 		if (n->data == rmData)
 		{
 			if (n == head)
@@ -61,8 +53,8 @@ Node* removeByData(Node* head, void* rmData)
 		}
 		else
 		{
+			previousNode = n;
 			n = n->next;
-			iterator++;
 		}
 	}
 }
@@ -92,9 +84,9 @@ Node* removeByName(Node* head, char* name) //le data dans Node est une personne 
 		}
 		else
 		{
-			p2 = p;
+			p2 = n;
 			n = n->next;
-			p = n;
+			p = n->data;
 		}
 	}
 }
@@ -103,8 +95,9 @@ Node* removeByName(Node* head, char* name) //le data dans Node est une personne 
 */
 void sort(Node* head)
 {
-	/*Node* n = head;
+	Node* n = head;
 	Person* p = n->data;
+	Person* pNext = n->next->data;
 	int nbElements = 0;
 
 	while (n != NULL)
@@ -114,11 +107,34 @@ void sort(Node* head)
 	}
 
 	n = head;
-	p = n->data;
-	
-	for (int i = 1; i < nbElements; i++)
+
+	int switched = 0;
+
+	for (int i = 0; i < (nbElements - 1); i++)
 	{
-		int y = i;
-		while(y > 0 && )
-	}*/
+		if (p->age > pNext->age)
+		{
+			int temp = p->age;
+			p->age = pNext->age;
+			pNext->age = temp;
+			switched = 1;
+		}
+		if (switched == 1)
+		{
+			switched = 0;
+			i = -1;
+			n = head;
+			p = n->data;
+			pNext = n->next->data;
+		}
+		else
+		{
+			n = n->next;
+			p = n->data;
+			if (n->next != NULL)
+			{
+				pNext = n->next->data;
+			}
+		}
+	}
 }
