@@ -146,7 +146,10 @@ int test_code(FILE* f) {
 		fprintf(stderr, "Insertion at Tail failed\n");
 		out = -1;
 	}
-	char* names[128] = { 0 };
+
+
+	//je l'ai fait dans l'autre labo
+	/*char* names[128] = { 0 };
 	alphabetise(&head, names);
 	for (int i = 1; i < num_persons; ++i) {
 		if ((int)names[i - 1][0] > (int)names[i][0] || ((int)names[i - 1][1] > (int)names[i][1] && (int)names[i - 1][0] == (int)names[i][0])) {
@@ -156,7 +159,7 @@ int test_code(FILE* f) {
 			}
 			out = -1;
 		}
-	}
+	}*/
 }
 
 int main(int argc, char** argv) {
