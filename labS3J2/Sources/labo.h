@@ -5,7 +5,6 @@
 extern uint8_t* heap;
 extern size_t heap_top;
 
-
 static void* allocate(size_t size) {
 	size_t old_top = heap_top;
 	heap_top += size;

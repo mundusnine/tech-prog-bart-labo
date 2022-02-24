@@ -1,0 +1,32 @@
+Note sur la fil ou "a queue"
+stack =  dernier mit dernier sorti
+file = premier mit premier sorti
+
+file
+typedef struct Node_t Node;
+
+struct Node_t{
+	void** data;
+	Node* prev;
+	Node* next;
+}
+
+void push(File* f, Node* n)
+{
+	if(f.prev == NULL)
+	{
+		f.prev = n;
+	}
+	Node* last = f.next;
+	f.next = n;
+	n.next = last;
+	
+}
+
+Node* pop(file* f)
+{
+	Node* last = f.prev;
+	f.prev = last.prev;
+	f.prev.prev.next = NULL;
+	return last;
+}
