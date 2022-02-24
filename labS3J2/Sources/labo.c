@@ -111,7 +111,7 @@ void alphabetise(Node* head, char* names[])
 	{
 		int z = 0;
 		Person* person = head->data;
-		while(person->name[z] != 0)
+		while(person->name[z] != '\0')
 		{
 			names[y] = person->name[z];
 			z++;
