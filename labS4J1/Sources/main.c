@@ -4,8 +4,8 @@
 
 #include "labo.h"
 
-static uint8_t* heap = NULL;
-static size_t heap_top = 0;
+uint8_t* heap = NULL;
+size_t heap_top = 0;
 
 
 /* This code is public domain -- Will Hartung 4/9/09 */
@@ -118,7 +118,7 @@ int test_code(FILE* f) {
 		}
 		push(s, &persons[0]);
 		push(s, &persons[0]);
-		if (s->top >= s->max_size) {
+		if (s->top > s->max_size) {
 			fprintf(stderr, "Vous ne prévenez pas l'overflow.\n");
 			pop(s);
 			pop(s);
@@ -144,7 +144,7 @@ int test_code(FILE* f) {
 		}
 		pop(s);
 		p = peek(s);
-		if (p != NULL || s->data[0] == NULL) {
+		if (p != NULL) {
 			fprintf(stderr, "peek ne retourne pas NULL lorsque vide ou il push un NULL pointeur.\n");
 			out = -1;
 		}

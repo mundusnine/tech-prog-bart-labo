@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 #include "labo.h"
 
 
@@ -10,7 +6,12 @@
 */
 Stack* new_stack(size_t max_size)
 {
-	
+	Stack* stack = allocate(sizeof(Stack));
+	stack->data = allocate(sizeof(void*) * max_size);
+	stack->max_size = max_size;
+	stack->top = 0;
+
+	return stack;
 }
 
 /*
@@ -19,6 +20,11 @@ Stack* new_stack(size_t max_size)
 void push(Stack* s, void* newData)
 {
 	
+	if (s->top < s->max_size && s->top >= 0)
+	{
+		s->top++;
+		s->data[s->top - 1] = newData;
+	}
 }
 
 /*
@@ -26,7 +32,18 @@ void push(Stack* s, void* newData)
 */
 void* pop(Stack* s)
 {
+	if (s->data[s->top - 1] != NULL)
+	{
+		s->top -= 1;
+		void* element = s->data[s->top];
+		s->data[s->top] = NULL;
 
+		return element;
+	}
+	else
+	{
+		return NULL;
+	}
 }
 
 /*
@@ -34,7 +51,14 @@ void* pop(Stack* s)
 */
 void* peek(Stack* s)
 {
-
+	if (s->data[s->top -1] != NULL &&s->top>0)
+	{
+		return s->data[s->top - 1];
+	}
+	else 
+	{
+		return NULL;
+	}
 }
 
 /*
@@ -42,7 +66,17 @@ void* peek(Stack* s)
 */
 void reverseStack(Stack* s)
 {
+	void* Tempo[64] = {0};
 
+	for (int i = 0; i < s->top; i++)
+	{
+		Tempo[i] = s->data[(s->top - 1)-i];
+	}
+
+	for (int i = 0; i < s->top; i++)
+	{
+		s->data[i] = Tempo[i];
+	}
 }
 
 /*
