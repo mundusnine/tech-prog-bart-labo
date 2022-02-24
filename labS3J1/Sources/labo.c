@@ -23,6 +23,8 @@ void insert(Node* currNode, void* newData)
 
 }
 
+
+
 /*
 * Cr�er un noeud et l'ajouter apr�s le noeud head. Si le noeud head est vide(data) lui donner la nouvelle valeur passer.
 */
@@ -66,7 +68,7 @@ Node* removeByData(Node* head, void* rmData)
 			previous->next = cpy->next; // Bridge entre les nodes qui seront séparés
 
 			memset(cpy, 0, sizeof(Node));
-			goto lol;
+			goto hehe;
 		}
 
 		if (prev >= 0) // Tout le temps
@@ -77,7 +79,7 @@ Node* removeByData(Node* head, void* rmData)
 
 		prev++;
 	}
-	lol:
+	hehe:
 	return previous;
 }
 
@@ -87,6 +89,7 @@ When name = Node->data, return previous node
 
 		supprimer faite un memset(node,0,sizeof(Node));
 */
+
 Node* removeByName(Node* head, char* name)
 {
 	Node* previous;
@@ -97,7 +100,6 @@ Node* removeByName(Node* head, char* name)
 	while (cpy != NULL)
 	{
 		p = cpy->data;
-
 		if (p->name == name && count > 0) // Ignore le header puisque impossible de return previous
 		{
 
@@ -117,11 +119,72 @@ Node* removeByName(Node* head, char* name)
 }
 
 
-/*
-* Trier par l'�ge. Utiliser l'algorithme que vous connaissez le mieux.
-*/
+
 void sort(Node* head) 
 {
+	Person* num1;
+	Person* num2;
+	Person* num3;
+	Node* big = head;
+	Node* comp = big->next;
+	Node* temp = head;
+
+	int count = 1;
+	while (big->next != NULL) // Combien de nodes y a t-il
+	{
+		big = big->next;
+		count++;
+	}
+
+
+	big = head;
+
+	int change = 0;
+	for (int i = 0; i < (count-1); i++)
+	{
+		
+
+		num1 = big->data;
+		num2 = comp->data;
+
+
+		if (num1->age > num2->age)
+		{
+			temp->data = big->data;
+			big->data = comp->data;
+			comp->data = temp->data;
+			change = 1;
+		}
+
+		if (change == 1)
+		{
+			i = -1;
+			change = 0;
+			
+			big = head;
+			comp = big->next;
+
+		}
+		else
+		{
+			big = big->next;
+			if (comp->next != NULL)
+			{
+				comp = comp->next;
+			}
+			else
+			{
+				break;
+			}
+		}
+
+
+
+		
+	}
+
+	
+
 
 
 }
