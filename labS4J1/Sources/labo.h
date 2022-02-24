@@ -2,8 +2,8 @@
 #include <assert.h>
 
 #define HEAP_SIZE 1024 * 1024
-static uint8_t* heap = NULL;
-static size_t heap_top = 0;
+extern uint8_t* heap;
+extern size_t heap_top;
 
 static void* allocate(size_t size) {
 	size_t old_top = heap_top;
@@ -15,6 +15,13 @@ static void* allocate(size_t size) {
 /*
 * Déclarer une structure de donnée appeler Stack qui contient une propriété, max_size de type size_t,top de type size_t et un tableau de type void**.
 */
+typedef struct Stack {
+	void** data;
+	size_t top;
+	size_t max_size;
+} Stack;
+
+
 
 typedef struct person_t {
 	char name[256];
