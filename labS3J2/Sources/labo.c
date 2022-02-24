@@ -10,6 +10,8 @@ void insert(Node* currNode, void* newData)
 	newNode->prev = currNode;
 	currNode->next = newNode;
 	newNode->data = newData;
+
+	checkHead(currNode);
 }
 
 void insertTail(Node* head, void* newData)
@@ -17,15 +19,17 @@ void insertTail(Node* head, void* newData)
 	if (head->data == NULL)
 	{
 		head->data = newData;
+		return;
 	}
 
-	Node* lastNode = head;
+	Node* lastNode = head->prev;
 	Node* newNode = allocate(sizeof(Node));
 
-	while (lastNode->next != NULL)
-	{
-		lastNode = lastNode->next;
-	}
+	//while (lastNode->next != NULL)
+	//{
+	//	lastNode = lastNode->next;
+	//}
+
 	head->prev = newNode;
 	lastNode->next = newNode;
 	newNode->prev = lastNode;
@@ -38,10 +42,12 @@ void insertHead(Node* head, void* newData)
 	if (head->data == NULL)
 	{
 		head->data = newData;
+		return;
 	}
 	Node* newNode = allocate(sizeof(Node));
 	newNode->next = head->next;
 	newNode->prev = head;
+	newNode->data = newData;
 	head->next = newNode;
 }
 
@@ -49,8 +55,14 @@ Node* removeNode(Node* currNode)
 {
 	Node* prevNode = currNode->prev;
 	Node* nextNode = currNode->next;
-	nextNode->prev = prevNode;
-	prevNode->next = nextNode;
+	if (nextNode != NULL)
+	{
+		nextNode->prev = prevNode;
+	}
+	if (prevNode != NULL)
+	{
+		prevNode->next = nextNode;
+	}
 	currNode->next = NULL;
 	currNode->prev = NULL;
 	return currNode;
@@ -65,6 +77,7 @@ void alphabetise(Node* head, char* names[])
 	while(checkElememt->next != NULL)
 	{
 		nombreElemen++;
+		checkElememt = checkElememt->next;
 	}
 
 	for (int i = 0; i < nombreElemen; i++)
@@ -113,14 +126,43 @@ void alphabetise(Node* head, char* names[])
 		Person* person = head->data;
 		while(person->name[z] != '\0')
 		{
+			printf("%c", person->name[z]);
 			names[y] = person->name[z];
 			z++;
 			y++;
 		}
 		names[y] = ' ';
 		y++;
-
+	
 		head = head->next;
 	}
 
+	//int t = 0;
+	//while (names[t] != '\n')
+	//{
+	//	printf("%c", names[t]);
+	//}
+
+}
+
+void checkHead(Node* currNode)
+{
+	Node* lastNode = currNode;
+	Node* head = currNode;
+	while (lastNode->next != NULL)
+	{
+		lastNode = lastNode->next;
+	}
+	while (head->prev != NULL && head->prev != lastNode && head->prev != lastNode->prev)
+	{
+		head = head->prev;
+	}
+	if (head != lastNode)
+	{
+		head->prev = lastNode;
+	}
+	else
+	{
+		head->prev = NULL;
+	}
 }
