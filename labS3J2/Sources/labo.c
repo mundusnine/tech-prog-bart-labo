@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include "labo.h"
 
+// N'EST PAS CYCLIQUE MODIFER DONC HEAD PREV = LAST MAIS LAST->NEXT != Head
 
 // PREV , DATA, NEXT
 
@@ -15,8 +16,12 @@ void insert(Node* currNode, void* newData)
 	NewNode->prev = currNode;
 	NewNode->next = currNode->next;
 
-
+	
 	currNode->next = NewNode;
+
+
+	Node* OtherNode = NewNode->next;
+	OtherNode->prev = NewNode;
 
 }
 
@@ -37,7 +42,7 @@ void insertTail(Node* head, void* newData)
 	if (head->data == NULL)
 	{
 		head->data = newData;
-		NewNode->data = NULL;
+		NewNode->data = newData;
 	}
 	else
 	{
@@ -65,7 +70,7 @@ void insertHead(Node* head, void* newData)
 	if (head->data == NULL)
 	{
 		head->data = newData;
-		NewNode->data = NULL;
+		NewNode->data = newData;
 	}
 	else
 	{
@@ -77,6 +82,7 @@ void insertHead(Node* head, void* newData)
 /*
 * Enlever le noeud de la liste et retourner le noeud avec aucune référence(i.e. next et prev == NULL)
 */
+
 Node* removeNode(Node* currNode)
 {
 	Node* prev = currNode->prev;
@@ -95,4 +101,6 @@ Node* removeNode(Node* currNode)
 /*
 * Ajouter dans le tableau le nom de chacun en ordre alphabétic. Par simplicité, considérer seulement les deux première lettre.
 */
-void alphabetise(Node* head, char* names[]);
+void alphabetise(Node* head, char* names[]) {
+
+}
