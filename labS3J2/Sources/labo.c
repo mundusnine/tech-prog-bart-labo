@@ -7,8 +7,8 @@ void insert(Node* currNode, void* newData)
 {
 	Node* nextNode = allocate(sizeof(Node));
 	nextNode->data = newData;
-	nextNode->next = NULL;
 	nextNode->prev = currNode;
+	nextNode->next = currNode->next;
 	currNode->next = nextNode;
 }
 
