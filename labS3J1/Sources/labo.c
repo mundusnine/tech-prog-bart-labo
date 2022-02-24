@@ -31,37 +31,37 @@ Node* removeByData(Node* head, void* rmData) {
 			return n;
 		}
 		head = head->next;
-		i++;
 		if (i >= 1)
 		{
 			n = n->next;
 		}
+		i++;
 	}
 }
 
 Node* removeByName(Node* head, char* name) {
-	Person* p = head->data;
+	Person* p = head;
+	Person* p2 = head;
 	int i = 0;
-	while (head != NULL) {
-		if (p == name) {
-			memset(p, 0, sizeof(Node));
-			return head->next - 1;
+	while (head->next != NULL) {
+		if (p->name == name) {
+			memset(head, 0, sizeof(Node));
+			return p2;
 		}
-		head = head->next;
-		i++;
+		p = head->next;
 		if (i >= 1)
 		{
-			
+			p2 = head->next;
 		}
+		i++;
 	}
-
 }
 
 void sort(Node* head) {
 
 	/*Person* p = head->data;
 	Person* p2 = other->data;
-	if(p->age <p2->age){
+	if(p->age < p2->age){
 		swap()
 	}*/
 

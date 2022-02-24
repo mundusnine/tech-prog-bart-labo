@@ -15,6 +15,12 @@ static void* allocate(size_t size) {
 /*
 * Déclarer une structure de donnée appeler Node qui est un noeud d'une liste doublement chaînée.
 */
+typedef struct Node_t Node;
+struct Node_t {
+	void* data;
+	Node* next;
+	Node* prev;
+};
 
 typedef struct person_t {
 	char name[256];
