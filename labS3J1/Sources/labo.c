@@ -69,11 +69,9 @@ Node* removeByName(Node* head, char* name)
 	{
 
 		//La raison pour laquel la fonction s'executer avec le Node.data sans preciser que nous voulions le Person.Nom et non Person.Age
-		//c'est que le parametre de fonction qui sert a la vérification est un String (char*) et donc quand nous le comparons avec l'adresse de la Person
-		// cela le compare avec tout les composantes de celui-ci (l'age et le nom) et considerant que l'age n'est pas un string la comparaison na pas lieu 
-		//puisqu'il ne son pas du meme type et il compare uniquement avec le Person.Nom.
+		//Nous le comparons avec l'adresse de la Person et puisque le Person.char est la premiere variable de la struc ils partage la meme adresse memoire
+		// et donc la comparaison fonction dans ce cas précis
 
-		//Donc dans ce cas precis (currNode->data == name) == (Person.nom == name)
 
 		if (currNode->data == name)
 		{
