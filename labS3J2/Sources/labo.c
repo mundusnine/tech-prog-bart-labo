@@ -30,11 +30,16 @@ void insertTail(Node* head, void* newData)
 
 void insertHead(Node* head, void* newData)
 {
-	Node* n = allocate(sizeof(Node));;
-	if (head != NULL)
+	
+	if (head->data != NULL)
 	{
-		head->prev->next = n;
-		n = newData;
+		Node* n = allocate(sizeof(Node));
+		if (head->prev != NULL)
+		{
+			head->prev->next = n;
+		}
+		head->next = n;
+		n->data = newData;
 		n->prev = head;
 		n->next = head->prev;
 	}
@@ -50,9 +55,11 @@ Node* removeNode(Node* currNode)
 {
 	if (currNode != NULL)
 	{
-		currNode->next->prev = NULL;
-		currNode->prev->next = NULL;
-		memset(currNode, 0, sizeof(Node));
+		currNode->next->prev = currNode->prev;
+		currNode->prev->next = currNode->next;
+		currNode->data = NULL;
+		currNode->next = NULL;
+		currNode->prev = NULL;
 	}
 }
 
