@@ -18,7 +18,6 @@ void insert(Node* currNode, void* newData)
 void insertHead(Node* head, void* newData)
 {
 	Node* n = allocate(sizeof(Node));
-
 	if (head->data == NULL)
 	{
 		head->data = newData;

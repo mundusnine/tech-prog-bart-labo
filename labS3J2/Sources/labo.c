@@ -4,15 +4,11 @@
 void insert(Node* currNode, void* newData)
 {
 	Node* n = allocate(sizeof(Node));
-	if (currNode->next == NULL)
+	if (currNode->prev == NULL)
 	{
-		n->next = currNode;
 		currNode->prev = n;
 	}
-	else
-	{
-		n->next = currNode->next;
-	}
+	n->next = currNode->next;
 	n->prev = currNode;
 	currNode->next = n;
 	n->data = newData;
@@ -21,48 +17,53 @@ void insert(Node* currNode, void* newData)
 //En faisant une list cyclique
 void insertTail(Node* head, void* newData)
 {
-	Node* n = allocate(sizeof(Node));
-
-	if (head->prev == NULL)
-	{
-		n->prev = head;
-		n->next = head;
-		head->prev = n;
-		head->next = n;
-	}
-	else
-	{
-		head->prev->next = n;
-		n->prev = head->prev;
-		n->next = head;
-	}
-
 	if (head->data == NULL)
 	{
 		head->data = newData;
+	}
+	else
+	{
+		Node* n = allocate(sizeof(Node));
+		if (head->prev == NULL)
+		{
+			n->prev = head;
+			n->next = NULL;
+			head->prev = n;
+			head->next = n;
+		}
+		else
+		{
+			head->prev->next = n;
+			n->prev = head->prev;
+			n->next = NULL;
+			n->data = newData;
+		}
 	}
 }
 
 //En faisant une list cyclique
 void insertHead(Node* head, void* newData)
 {
-	Node* n = allocate(sizeof(Node));
-
-	if (head->next == NULL)
-	{
-		n->next = head;
-		head->prev = n;
-	}
-	else
-	{
-		n->next = head->next;
-	}
-	n->prev = head;
-	head->next = n;
-
+	
 	if (head->data == NULL)
 	{
 		head->data = newData;
+	}
+	else
+	{
+		Node* n = allocate(sizeof(Node));
+		if (head->next == NULL)
+		{
+			n->next = NULL;
+			head->prev = n;
+		}
+		else
+		{
+			n->next = head->next;
+		}
+		n->prev = head;
+	    head->next = n;
+		n->data = newData;
 	}
 }
 
@@ -79,8 +80,7 @@ Node* removeNode(Node* currNode)
 //En m'inspirant du bubbleSort
 void alphabetise(Node* head, char* names[])
 {
-	Node* n = memset(sizeof(Node));
-	n = head;
+	/*Node* n = head;
 	int firstAdress = head;
 	int lettreASCII[2] = { 0 }; //pour stocker 2 premier caracteres
 	int lettreNextASCII[2] = { 0 }; //pour stocker 2 premier caracteres
@@ -137,5 +137,5 @@ void alphabetise(Node* head, char* names[])
 		{
 			n = n->next;
 		}
-	}
+	}*/
 }
