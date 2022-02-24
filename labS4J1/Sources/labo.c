@@ -84,5 +84,25 @@ void reverseStack(Stack* s)
 */
 void sortStack(Stack* s)
 {
+	void* Tempo[64] = { 0 };
+	Person* p2 = pop(s);
+	for (int i = 1; i < s->max_size; i++)
+	{
+		Person* p = pop(s);
+		if (p->age > p2->age)
+		{
+			Tempo[i - 1] = p;
+		}
+		else
+		{
+			Tempo[i - 1] = p2;
+			p2 = p;
+		}
+		for (int i2 = 0; i2 <i; i2++)
+		{
+			Tempo[i];
+		}
+	}
+
 
 }
