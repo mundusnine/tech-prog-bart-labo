@@ -69,7 +69,7 @@ void sort(Node* head)
 	Person* person = head;
 	Person* nextPerson = head->next;
 	int count = 0;
-	int interchange = 0;
+	int swap = 0;
 
 	while (newNode != NULL)
 	{
@@ -85,12 +85,12 @@ void sort(Node* head)
 			tempNode = newNode;
 			newNode = newNode->next;
 			newNode->next = tempNode;
-			interchange = 1;
+			swap = 1;
 		}
 		
-		if (interchange == 1)
+		if (swap == 1)
 		{
-			interchange = 0;
+			swap = 0;
 			i = 0;
 		}
 	}
