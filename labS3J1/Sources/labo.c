@@ -1,68 +1,99 @@
-#include <assert.h>
-#include <stdint.h>
 #include "labo.h"
 
-/*
-* Declarer une structure de donnée appeler Node qui est un noeud d'une liste simplement chaînée.
-*/
 
-
-/*
-* Creer un noeud et l'ajouter apres le noeud currNode. Utiliser la fonction allocate pour allouer de la memoire.
-*/
-void insert(Node* currNode, void* newData) {
-	Node* n = allocate(sizeof(Node));
-	n->data = newData;
-	currNode->next = n;
+void insert(Node* currNode, void* newData)
+{
+	Node* newNode = allocate(sizeof(Node));
+	newNode->next = currNode->next;
+	newNode->data = newData;
+	currNode->next = newNode;
 }
 
-/*
-* Creer un noeud et l'ajouter apres le noeud head. Si le noeud head est vide(data) lui donner la nouvelle valeur passer.
-*/
-void insertHead(Node* head, void* newData) {
-	Node* n = allocate(sizeof(Node));
-	if (head->data == NULL) 
+void insertHead(Node* head, void* newData)
+{
+	if (head->data == NULL)
 	{
 		head->data = newData;
 	}
-	else if (head->data != NULL)
+	else
 	{
-		head->next = n;
+		Node* newNode = allocate(sizeof(Node));
+		newNode->next = head->next;
+		head->next = newNode;
 	}
 }
 
-/*
-* Supprimer le noeud ayant la valeur de pointeur de data i.e. node->data == rmData. Par simplicite, pour supprimer faite un memset(node,0,sizeof(Node));
-* Retourner le noeud juste avant celui supprimer
-Si param rmData = current->data  Effacer current node et return previous node
-*/
-Node* removeByData(Node* head, void* rmData) {
-	Node* n = head;
-	Node* previous;
-	int i = 0;
-
-while()
+Node* removeByData(Node* head, void* rmData)
 {
-	if (rmData == n)
-	{
-
-	}
-
+	Node* copyNode = head;
+	Node* prevNode = head;
 	
+	while (copyNode != NULL)
+	{
+		if (copyNode->data == rmData)
+		{
+			memset(copyNode,0,sizeof(Node));
+			return prevNode;
+		}
+		else if(copyNode->data != rmData)
+		{
+			prevNode = copyNode;
+			copyNode = copyNode->next;
+		}
+	}
 }
 
-/*
-* Supprimer le noeud ayant le nom passer par name.Par simplicite, pour supprimer faite un memset(node,0,sizeof(Node));
-* Retourner le noeud juste avant celui supprimer
-*/
-Node* removeByName(Node* head, char* name) {
-
+Node* removeByName(Node* head, char* name)
+{
+	Node* newNode = allocate(sizeof(Node));
+	newNode = head;
+	Node* prevNode = head;
+	Person* person = newNode->data;
+	while (newNode != NULL)
+	{
+		if (person->name == name)
+		{
+			memset(newNode, 0, (sizeof(Node)));
+			return prevNode;
+		}
+		else if (person->name != name)
+		{
+			prevNode = newNode;
+			newNode = newNode->next;
+		}
+	}
 }
 
-/*
-* Trier par l'age. Utiliser l'algorithme que vous connaissez le mieux.
-*/
-void sort(Node* head) {
-	//utiliser la struct person
-	//ne pas faire
+void sort(Node* head)
+{
+	Node* newNode = head;
+	Node* tempNode;
+	Person* person = head;
+	Person* nextPerson = head->next;
+	int count = 0;
+	int swap = 0;
+
+	while (newNode != NULL)
+	{
+		count += 1;
+		newNode = newNode->next;
+	}
+	newNode = head;
+
+	for (int i = 0; i < count - 1; i++)
+	{
+		if (person->age > nextPerson->age)
+		{
+			tempNode = newNode;
+			newNode = newNode->next;
+			newNode->next = tempNode;
+			swap = 1;
+		}
+		
+		if (swap == 1)
+		{
+			swap = 0;
+			i = -1;
+		}
+	}
 }
