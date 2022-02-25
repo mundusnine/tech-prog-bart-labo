@@ -4,8 +4,8 @@
 void insert(Node* currNode, void* newData)
 {
 	Node* newNode = allocate(sizeof(Node));
-	newNode->next = currNode->next;
 	newNode->data = newData;
+	newNode->next = currNode->next;
 	currNode->next = newNode;
 }
 
@@ -20,6 +20,7 @@ void insertHead(Node* head, void* newData)
 		Node* newNode = allocate(sizeof(Node));
 		newNode->next = head->next;
 		head->next = newNode;
+		newNode->data = newData;
 	}
 }
 
