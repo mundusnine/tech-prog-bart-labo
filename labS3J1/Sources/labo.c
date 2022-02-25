@@ -59,16 +59,4 @@ Node* removeByName(Node* head, char* name) {
 
 void sort(Node* head) {
 
-	/*Person* p = head->data;
-	Person* p2 = other->data;
-	if(p->age < p2->age){
-		swap()
-	}*/
-
-	for (int i = 1; i < sizeof(Node); i++) {
-		int y = i;
-		while (y > 0) {
-
-		}
-	}
 }
