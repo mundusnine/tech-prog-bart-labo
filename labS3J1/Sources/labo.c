@@ -6,21 +6,25 @@
 
 void insert(Node* currNode, void* newData)
 {
-	Node* test = allocate(sizeof(Node));
-	test->data = newData;
-	test->next = NULL;
-	currNode->next = test;
+	Node* newNode = allocate(sizeof(Node));
+	newNode->data = newData;
+	newNode->next = currNode->next;
+	currNode->next = newNode;
 }
 
 void insertHead(Node* head, void* newData)
 {
-	Node* test1 = allocate(sizeof(Node));
-	test1->data = newData;
-	test1->next = head->next;
-	head->next = test1;
 	if (head->data == NULL)
 	{
 		head->data = newData;
+		return;
+	}
+	else
+	{
+		Node* test1 = allocate(sizeof(Node));
+		test1->data = newData;
+		test1->next = head->next;
+		head->next = test1;
 	}
 }
 
@@ -29,8 +33,23 @@ Node* removeByData(Node* head, void* rmData)
 	int i = 0;
 	Node* supprime = head;
 	Node* nodeReturn = head;
-	while (supprime->data != rmData)
+	while (supprime != NULL)
 	{
+		if (supprime->data == rmData)
+		{
+			if (nodeReturn == supprime)
+			{
+				memset(supprime, 0, sizeof(Node));
+				return nodeReturn->next;
+			}
+			else
+			{
+				nodeReturn->next = supprime->next;
+				memset(supprime, 0, sizeof(Node));
+				return nodeReturn;
+			}
+		}
+
 		if (i != 0)
 		{
 			nodeReturn = nodeReturn->next;
@@ -42,16 +61,6 @@ Node* removeByData(Node* head, void* rmData)
 		{
 			i++;
 		}
-	}
-	memset(supprime, 0, sizeof(Node));
-
-	if (nodeReturn == supprime)
-	{
-		return nodeReturn->next;
-	}
-	else
-	{
-		return nodeReturn;
 	}
 }
 
@@ -65,14 +74,15 @@ Node* removeByName(Node* head, char* name)
 		Person* p = (Person*)supprime->data;
 		if (p->name == name)
 		{
-			memset(supprime, 0, sizeof(Node));
-
 			if (nodeReturn == supprime)
 			{
+				memset(supprime, 0, sizeof(Node));
 				return nodeReturn->next;
 			}
 			else
 			{
+				nodeReturn->next = supprime->next;
+				memset(supprime, 0, sizeof(Node));
 				return nodeReturn;
 			}
 		}

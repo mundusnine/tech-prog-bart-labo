@@ -1,8 +1,6 @@
 #include<stdio.h>
 #include"labo.h"
 
-//Labo non tester
-
 void insert(Node* currNode, void* newData)
 {
 	Node* newNode = allocate(sizeof(Node));
@@ -21,14 +19,8 @@ void insertTail(Node* head, void* newData)
 		head->data = newData;
 		return;
 	}
-
 	Node* lastNode = head->prev;
 	Node* newNode = allocate(sizeof(Node));
-
-	//while (lastNode->next != NULL)
-	//{
-	//	lastNode = lastNode->next;
-	//}
 
 	head->prev = newNode;
 	lastNode->next = newNode;
@@ -70,36 +62,40 @@ Node* removeNode(Node* currNode)
 
 void alphabetise(Node* head, char* names[])
 {
-	int nombreElemen = 0;
-	Node* checkElememt = head;
 	int change = 0;
-
-	while(checkElememt->next != NULL)
+	int dontChange = 0;
+	Node* checkElement = head;
+	int nombreElement = 0;
+	while (checkElement != NULL)
 	{
-		nombreElemen++;
-		checkElememt = checkElememt->next;
+		nombreElement++;
+		checkElement = checkElement->next;
 	}
 
-	for (int i = 0; i < nombreElemen; i++)
+	for (int i = 0; i < nombreElement; i++)
 	{
-		int a = 0;
-
 		Node* element1 = head;
 		Node* element2 = head->next;
-
-		while (a < nombreElemen - 1 - i)
+		for (int a = 0; a < nombreElement - i - 1; a++)
 		{
 			Person* p1 = element1->data;
 			Person* p2 = element2->data;
-
-			for (int b = 0; b < 1; b++)
+			for (int b = 0; b < 2; b++)
 			{
-				if (p1->name[b] > p2->name[b] && change == 0)
+				if (p1->name[b] > p2->name[b] && change != 1 && dontChange != 1)
 				{
 					change = 1;
 				}
+				else if (p1->name[b] == p2->name[b])
+				{
+					dontChange = 0;
+				}
+				else
+				{
+					dontChange = 1;
+				}
 			}
-
+			dontChange = 0;
 			if (change == 1)
 			{
 				Node temp1 = *element1;
@@ -114,34 +110,27 @@ void alphabetise(Node* head, char* names[])
 
 			element1 = element1->next;
 			element2 = element2->next;
+		}
+	}
+
+	Node* n = head;
+	int positionTable = 0;
+	for (int i = 0; i < nombreElement; i++)
+	{
+		int a = 0;
+		Person* p = n->data;
+		
+		//je narrive pas a ajouter les nom dans le tableau de char :(
+		names[positionTable] = p->name;
+
+		while (p->name[a] != 0)
+		{
+			positionTable++;
 			a++;
 		}
+		positionTable--;
+		n = n->next;
 	}
-
-	int y = 0;
-
-	while (head->next != NULL)
-	{
-		int z = 0;
-		Person* person = head->data;
-		while(person->name[z] != '\0')
-		{
-			printf("%c", person->name[z]);
-			names[y] = person->name[z];
-			z++;
-			y++;
-		}
-		names[y] = ' ';
-		y++;
-	
-		head = head->next;
-	}
-
-	//int t = 0;
-	//while (names[t] != '\n')
-	//{
-	//	printf("%c", names[t]);
-	//}
 
 }
 
