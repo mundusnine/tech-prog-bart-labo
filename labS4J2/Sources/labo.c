@@ -7,15 +7,16 @@
 */
 void push(Queue* q, Node* n)
 {
-	if(q != NULL)
-	{ 
-	
-	}
-	else
+	if (q->prev != NULL) 
 	{
-		q->data = n->data;
-		q->next = NULL;
-		q->prev = q;
+		q->prev->next = n;
+		q->prev = n;
+	}
+	else 
+	{
+		q->prev = n;
+		q->next = q->prev;
+
 	}
 }
 
