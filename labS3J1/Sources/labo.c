@@ -17,9 +17,15 @@ void insert(Node* currNode, void* newData)
 {
 	Node* NewNode = allocate(sizeof(Node));  // Allocation d'espace mémoire de la taille d'un Node
 	NewNode->data = newData;  // Enregistrement des données passées en parametre dans un.data
+
+
+	
+
 	currNode->next = NewNode;  // CurrentNode.next prend la valeur de l'adresse de la nouvelle node
 
 	NewNode->next = NULL; // L'adresse next du node devient NULL, puisqu'elle pointe vers rien
+
+	
 
 }
 
@@ -30,15 +36,16 @@ void insert(Node* currNode, void* newData)
 */
 void insertHead(Node* head, void* newData) // Node* Head = Le premier Node dans la liste   
 {
-	Node* NewNode = allocate(sizeof(Node)); // Allocate espace
-	NewNode->next = head->next;  // NewNode->next pointe ce que le header pointais
-	head->next = NewNode; // Le header pointe maintenant vers NewNode
+	
 	if (head->data == NULL)
 	{
 		head->data = newData;
 	}  
 	else
 	{
+		Node* NewNode = allocate(sizeof(Node)); // Allocate espace
+		NewNode->next = head->next;  // NewNode->next pointe ce que le header pointait
+		head->next = NewNode; // Le header pointe maintenant vers NewNode
 		NewNode->data = newData;
 	}
 }
@@ -135,19 +142,13 @@ void sort(Node* head)
 		big = big->next;
 		count++;
 	}
-
-
 	big = head;
 
 	int change = 0;
 	for (int i = 0; i < (count-1); i++)
 	{
-		
-
 		num1 = big->data;
 		num2 = comp->data;
-
-
 		if (num1->age > num2->age)
 		{
 			temp->data = big->data;
@@ -155,7 +156,6 @@ void sort(Node* head)
 			comp->data = temp->data;
 			change = 1;
 		}
-
 		if (change == 1)
 		{
 			i = -1;
@@ -177,10 +177,6 @@ void sort(Node* head)
 				break;
 			}
 		}
-
-
-
-		
 	}
 
 	

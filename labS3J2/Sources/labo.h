@@ -54,3 +54,6 @@ Node* removeNode(Node* currNode);
 * Ajouter dans le tableau le nom de chacun en ordre alphabétic. Par simplicité, considérer seulement les deux première lettre.
 */
 void alphabetise(Node* head, char* names[]);
+
+
+void HeadLast(Node* currNode);
