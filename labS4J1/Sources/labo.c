@@ -84,25 +84,53 @@ void reverseStack(Stack* s)
 */
 void sortStack(Stack* s)
 {
+	//Utilisation de Brute force afin de sort la Stack O(n2)
 	void* Tempo[64] = { 0 };
-	Person* p2 = pop(s);
-	for (int i = 1; i < s->max_size; i++)
+	for (int i = 0; i < s->max_size-1; i++)
 	{
-		Person* p = pop(s);
-		if (p->age > p2->age)
+		Person* p2 = pop(s);
+		for (int i2 = 0; i2 < s->max_size-1; i2++)
 		{
-			Tempo[i - 1] = p;
+			Person* p = pop(s);
+			if (p->age > p2->age)
+			{
+				Tempo[i2] = p;
+			}
+			else
+			{
+				Tempo[i2] = p2;
+				p2 = p;
+			}
+			if (i2 == s->max_size - 2)
+			{
+				if (p->age != Tempo[i2])
+				{
+					Tempo[i2+1] = p;
+				}
+				if (p2->age != Tempo[i2])
+				{
+					Tempo[i2+1] = p2;
+				}
+				i2 = 0;
+				break;
+			}
+		}
+		if (i == s->max_size - 2)
+		{
+			//envoie de la stack sorted
+			for (int i3 = 0; i3 < s->max_size; i3++)
+			{
+				push(s, Tempo[i3]);
+			}
 		}
 		else
 		{
-			Tempo[i - 1] = p2;
-			p2 = p;
-		}
-		for (int i2 = 0; i2 <i; i2++)
-		{
-			Tempo[i];
+			//revoie inverser dans la stack
+			for (int i3 = 0; i3 < s->max_size; i3++)
+			{
+				push(s, Tempo[s->max_size - 1 - i3]);
+			}
 		}
 	}
-
 
 }

@@ -180,8 +180,6 @@ int test_code(FILE* f) {
 		fprintf(stderr, "new_stack implementation fails to create the stack...\n");
 		out = -1;
 	}
-	
-
 	return out;
 }
 
