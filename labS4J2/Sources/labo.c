@@ -9,13 +9,10 @@ void push(Queue* q, Node* n)
 {
 	if (q->prev != NULL) 
 	{
-		q->prev->next = n;
-		q->prev = n;
+
 	}
 	else 
 	{
-		q->prev = n;
-		q->next = q->prev;
 
 	}
 }
@@ -25,7 +22,16 @@ void push(Queue* q, Node* n)
 */
 Node* pop(Queue* q)
 {
-
+	if (q->prev != NULL)
+	{
+		Node* Remove = q->prev;
+		q->prev = q->prev->prev;
+		return Remove;
+	}
+	else
+	{
+		return NULL;
+	}
 }
 
 
@@ -34,7 +40,14 @@ Node* pop(Queue* q)
 */
 Node* peek(Queue* q)
 {
-
+	if (q->prev != NULL)
+	{
+		return q->prev;
+	}
+	else
+	{
+		return NULL;
+	}
 }
 
 /*
