@@ -9,22 +9,25 @@ void insert(Node* currNode, void* newData)
 {
 	Node* n = allocate(sizeof(Node));
 	n->data = newData;
-	currNode->next = n;
 	n->next = NULL;
+	currNode->next = n;
 }
 /*
 * Cr�er un noeud et l'ajouter apr�s le noeud head. Si le noeud head est vide(data) lui donner la nouvelle valeur passer.
 */
 void insertHead(Node* head, void* newData)
 {
-	Node* n = allocate(sizeof(Node));
 	if (head->data == NULL)
 	{
 		head->data = newData;
 	}
-
-	head->next = n;
-	n->next = NULL;
+	else
+	{
+		Node* n = allocate(sizeof(Node));
+		n->data = newData;
+		n->next = head->next;
+		head->next = n;
+	}
 }
 
 /*
@@ -64,26 +67,19 @@ Node* removeByData(Node* head, void* rmData)
 Node* removeByName(Node* head, char* name) //le data dans Node est une personne de la struct person_t
 {
 	Node* n = head;
+	Node* nPrev = head;
 	Person* p = n->data;
-	Person* p2;
 
 	while (n != NULL)
 	{
 		if (p->name == name)
 		{
-			if (p == head->data)
-			{
-				return head;
-			}
-			else
-			{
-				memset(n, 0, sizeof(Node));
-				return p2;
-			}
+			memset(n, 0, sizeof(Node));
+			return nPrev;
 		}
 		else
 		{
-			p2 = n;
+			nPrev = n;
 			n = n->next;
 			p = n->data;
 		}
@@ -92,7 +88,9 @@ Node* removeByName(Node* head, char* name) //le data dans Node est une personne 
 /*
 * Trier par l'�ge. Utiliser l'algorithme que vous connaissez le mieux.
 */
-void sort(Node* head)
+
+//le sort semble fonctionner, le probleme doit venir d'ailleur dans mes fonctions.
+void sort(Node* head) 
 {
 	Node* n = head;
 	Person* p = n->data;
@@ -113,9 +111,9 @@ void sort(Node* head)
 	{
 		if (p->age > pNext->age)
 		{
-			int temp = p->age;
-			p->age = pNext->age;
-			pNext->age = temp;
+			Person* temp = n->data;
+			n->data = n->next->data;
+			n->next->data = temp;
 			switched = 1;
 		}
 		if (switched == 1)

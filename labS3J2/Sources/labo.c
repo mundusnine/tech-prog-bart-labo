@@ -1,20 +1,17 @@
 #include "labo.h"
 
-//En faisant une list cyclique.
+
 void insert(Node* currNode, void* newData)
 {
 	Node* n = allocate(sizeof(Node));
-	if (currNode->prev == NULL)
-	{
-		currNode->prev = n;
-	}
 	n->next = currNode->next;
 	n->prev = currNode;
 	currNode->next = n;
 	n->data = newData;
+	
 }
 
-//En faisant une list cyclique
+//Ca me marque que l'insertTail a failed mais je ne trouve pas l'erreur.
 void insertTail(Node* head, void* newData)
 {
 	if (head->data == NULL)
@@ -26,22 +23,23 @@ void insertTail(Node* head, void* newData)
 		Node* n = allocate(sizeof(Node));
 		if (head->prev == NULL)
 		{
+			head->prev = n;
 			n->prev = head;
 			n->next = NULL;
-			head->prev = n;
-			head->next = n;
+			n->data = newData;
 		}
 		else
 		{
-			head->prev->next = n;
 			n->prev = head->prev;
-			n->next = NULL;
+			head->prev->next = n;
+			head->prev = n;
 			n->data = newData;
+			n->next = NULL;
 		}
 	}
 }
 
-//En faisant une list cyclique
+
 void insertHead(Node* head, void* newData)
 {
 	
@@ -67,12 +65,18 @@ void insertHead(Node* head, void* newData)
 	}
 }
 
+//j'ai supposément une erreur dans cette fonction.
 Node* removeNode(Node* currNode)
 {
-	currNode->prev->next = currNode->next;
-	currNode->next->prev = currNode->prev;
-	currNode->prev = NULL;
+	Node* nodePrev = currNode->prev;
+	Node* nodeNext = currNode->next;
+	if (nodeNext != NULL && nodePrev != NULL)
+	{
+		nodeNext->prev = nodePrev;
+		nodePrev->next = nodeNext;
+	}
 	currNode->next = NULL;
+	currNode->prev = NULL;
 
 	return currNode;
 }
@@ -93,8 +97,8 @@ void alphabetise(Node* head, char* names[])
 	}
 
 	n = head;
-	Person* p = memset(sizeof(Person));
-	Person* pNext = memset(sizeof(Person));
+	Person* p = allocate(sizeof(Person));
+	Person* pNext = allocate(sizeof(Person));
 	int switched = 0;
 
 	for (int i = 0; i < (nbElements - 1); i++)

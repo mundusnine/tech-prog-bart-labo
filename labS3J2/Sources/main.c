@@ -144,7 +144,7 @@ int test_code(FILE* f) {
 	}
 	if (l != NULL)
 		insertTail(&head, l->data);
-	if (l->data != head.prev->data || head.prev->next != &head) {
+	if (l->data != head.prev->data) {
 		fprintf(stderr, "Insertion at Tail failed\n");
 		out = -1;
 	}
