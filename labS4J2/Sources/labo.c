@@ -9,11 +9,13 @@ void push(Queue* q, Node* n)
 {
 	if (q->prev != NULL) 
 	{
-
+		q->next->prev = n;
+		q->next = n;
 	}
 	else 
 	{
-
+		q->next = n;
+		q->prev = q->next;
 	}
 }
 
