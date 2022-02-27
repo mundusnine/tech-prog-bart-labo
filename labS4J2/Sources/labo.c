@@ -58,7 +58,25 @@ Node* peek(Queue* q)
 */
 void pushAsPriorityQueue(Queue* q, Node* n)
 {
-
+	Person* p = q->prev;
+	Person* p2 = n;
+	if (q->prev != NULL)
+	{
+		//if (p->age < p2->age)
+		//{
+			q->next->prev = n;
+			q->next = n;
+		//}
+		//else
+		//{
+		//	q->prev = n;
+		//}
+	}
+	else
+	{
+		q->next = n;
+		q->prev = q->next;
+	}
 }
 
 
