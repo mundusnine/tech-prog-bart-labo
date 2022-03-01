@@ -1,6 +1,6 @@
 Note sur la fil ou "a queue"
-stack =  dernier mit dernier sorti
-file = premier mit premier sorti
+stack =  premier mit premier sorti
+file = dernier mit dernier sorti
 
 file
 typedef struct Node_t Node;
