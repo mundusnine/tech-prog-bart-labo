@@ -1,4 +1,6 @@
 #include "labo.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 Stack* new_stack(size_t max_size)
 {
@@ -58,7 +60,7 @@ void reverseStack(Stack* s)
 		if (it < (s->top / 2))
 		{
 			void* tempData = s->data[(s->top - 1) - it];
-			s->data[s->top - it] = tempData;
+			s->data[(s->top -1) - it] = s->data[it];
 			s->data[it] = tempData;
 			it++;
 		}
@@ -67,5 +69,33 @@ void reverseStack(Stack* s)
 
 void sortStack(Stack* s)
 {
+	int count = s->top;
+	int switched = 0;
+	Person** personne = allocate(sizeof(Person) * count);
+	
+	for (int i = 0; i < count; i++)
+	{
+		personne[i] = pop(s);
+	}
 
+	for (int i = 0; i < (count - 1); i++)
+	{
+		if (personne[i]->age < personne[i + 1]->age)
+		{
+			Person* temp = personne[i];
+			personne[i] = personne[i + 1];
+			personne[i + 1] = temp;
+			switched = 1;
+		}
+		if (switched == 1)
+		{
+			switched = 0;
+			i = -1;
+		}
+	}
+
+	for (int i = 0; i < count; i++)
+	{
+		push(s, personne[i]);
+	}
 }
