@@ -35,7 +35,7 @@ void push(Stack* s, void* newData)
 	}
 	else
 	{
-		return;
+		printf("Overflow\n");
 	}
 
 
@@ -46,23 +46,20 @@ void push(Stack* s, void* newData)
 */
 void* pop(Stack* s)
 {
-
-	if (s->data[s->top-1] != NULL) // Si elem[top] != NULL y retourner l'info et la supprimer (mettre a null)
+	if (s->data[s->top-1] != NULL)
 	{
-		void* data = s->data[s->top - 1]; // copie
+		void* temp = s->data[s->top-1];
+		s->data[s->top-1] = NULL;
 
 
-		s->data[s->top - 1] = NULL; // Mettre a null
-		s->top--; // Decrementation du top
 
-		return data; // retour de l'info
+		s->top--;
+		return temp;
 	}
-	else // Si vide a elem[top-1] 
+	else if (s->data == NULL)
 	{
-		s->top--; // Decrementation du top ?
 		return NULL;
 	}
-	
 
 
 }
@@ -72,7 +69,14 @@ void* pop(Stack* s)
 */
 void* peek(Stack* s)
 {
-
+	if (s->data[s->top -1] != NULL)
+	{
+		return s->data[s->top-1];
+	}
+	else if (s->data[s->top-1] == NULL)
+	{
+	return NULL;
+	}
 }
 
 /*
@@ -80,13 +84,38 @@ void* peek(Stack* s)
 */
 void reverseStack(Stack* s)
 {
+	void* data; // Ceci n'est pas une variable de type Stack 
+	int up = s->top-1;
+	int down = 0;
+	for (int i = 0; i < s->top/2; i++)
+	{
+		data = s->data[up];
+		s->data[up] = s->data[down];
+		s->data[down] = data;
+		up--;
+		down++;
+	}
+
 
 }
+/*
+typedef struct person_t {
+	char name[256];
+	size_t age;
+} Person;
+*/
+
 
 /*
-* Triée la stack.La personne sur le haut/top est la plus jeune. Vous ne pouvez pas modifier la propriété data directement. Vous devez utiliser push,pop et/ou peek.
+Triez la stack.La personne sur le haut/top est la plus jeune. 
+Vous ne pouvez pas modifier la propriété data directement. 
+Vous devez utiliser push,pop et/ou peek
 */
+
+
 void sortStack(Stack* s)
 {
+
+
 
 }
