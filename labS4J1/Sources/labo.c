@@ -62,28 +62,22 @@ void sortStack(Stack* s)
 	int top = s->top;
 	for (int i = 0; i < s->top; i++)
 	{
-		p[i] = s->data[s->top - i - 1];
-		printf("%d ", p[i]->age);
+		p[i] = s->data[i];
 	}
-	printf("\n");
+
 	for (int i = 0; i < s->top; i++)
 	{
 		for (int a = 0; a < s->top - i - 1; a++)
 		{
-			if (p[a]->age < p[a + 1]->age)
+			if (p[a]->age > p[a + 1]->age)
 			{
 				Person* temp1 = p[a];
 				Person* temp2 = p[a + 1];
 
-				p[a] = temp1;
-				p[a + 1] = temp2;
+				p[a] = temp2;
+				p[a + 1] = temp1;
 			}
 		}
-	}
-
-	for (int i = 0; i < top; i++)
-	{
-		printf("%d ", p[i]->age);
 	}
 
 	for (int i = 0; i < top; i++)
@@ -91,10 +85,8 @@ void sortStack(Stack* s)
 		pop(s);
 	}
 
-
-
 	for (int i = 0; i < top; i++)
 	{
-		push(s, p[i]);
+		push(s, p[top - i - 1]);
 	}
 }

@@ -2,8 +2,8 @@
 #include <assert.h>
 
 #define HEAP_SIZE 1024 * 1024
-static uint8_t* heap = NULL;
-static size_t heap_top = 0;
+extern uint8_t* heap;
+extern size_t heap_top;
 
 static void* allocate(size_t size) {
 	size_t old_top = heap_top;
@@ -15,6 +15,17 @@ static void* allocate(size_t size) {
 /*
 * Déclarer une structure de donnée appeler Queue qui est un noeud comme le Node de la liste doublement chaînée. Déclaré aussi un noeud qui va avoir le nom Node.
 */
+
+typedef struct Node Node;
+
+struct Node
+{
+	Node* prev;
+	void* data;
+	Node* next;
+};
+
+typedef Node Queue;
 
 typedef struct person_t {
 	char name[256];
@@ -39,7 +50,7 @@ Node* pop(Queue* q);
 Node* peek(Queue* q);
 
 /*
-* Ajouter l'élément sur la queue/file comme si elle serait une priority queue. Utiliser l'âge afin de "trié" à chaque push.La personne au premier pop() est la plus jeune.
+* Ajouter l'élément sur la queue/file comme si elle serait une priority queue. Utiliser l'âge afin de "trié" à chaque push. La personne au premier pop() est la plus jeune.
 * On utilise pas une fonction de tri.
 */
 void pushAsPriorityQueue(Queue* q, Node* n);
