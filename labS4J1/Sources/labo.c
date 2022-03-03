@@ -44,7 +44,7 @@ void* peek(Stack* s)
 
 void reverseStack(Stack* s)
 {
-	void** temp = allocate(sizeof(s->data));
+	void** temp = allocate(sizeof(void**) * s->top);
 	for (int i = 0; i < s->top; i++)
 	{
 		temp[i] = s->data[s->top - i - 1];
@@ -53,12 +53,12 @@ void reverseStack(Stack* s)
 	{
 		s->data[i] = temp[i];
 	}
-	memset(temp, 0, sizeof(temp));
+	memset(temp, 0, sizeof(void**) * s->top);
 }
 
 void sortStack(Stack* s)
 {
-	Person** p = allocate(sizeof(s->data));
+	Person** p = allocate(sizeof(s->data) * s->top);
 	int top = s->top;
 	for (int i = 0; i < s->top; i++)
 	{
@@ -89,4 +89,6 @@ void sortStack(Stack* s)
 	{
 		push(s, p[top - i - 1]);
 	}
+
+	memset(p, 0, sizeof(s->data) * s->top);
 }

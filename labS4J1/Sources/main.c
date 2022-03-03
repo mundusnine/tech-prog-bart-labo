@@ -132,6 +132,7 @@ int test_code(FILE* f) {
 		}
 		push(s, &persons[num_persons -1]);
 		Person* p = peek(s);
+		//lordre de de persons nest pas dans le bonne ordre il a deux index inveser je ne trouve pas d'ou provient l'erreur
 		if (p->name != persons[num_persons - 1].name || p->age != persons[num_persons - 1].age) {
 			fprintf(stderr, "peek n'a pas retourner exactement la même Personne.\n");
 			out = -1;
