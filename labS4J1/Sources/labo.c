@@ -33,10 +33,7 @@ void push(Stack* s, void* newData)
 		s->data[s->top] = newData;
 		s->top++;
 	}
-	else
-	{
-		printf("Overflow\n");
-	}
+
 
 
 }
@@ -98,12 +95,7 @@ void reverseStack(Stack* s)
 
 
 }
-/*
-typedef struct person_t {
-	char name[256];
-	size_t age;
-} Person;
-*/
+
 
 
 /*
@@ -115,7 +107,47 @@ Vous devez utiliser push,pop et/ou peek
 
 void sortStack(Stack* s)
 {
+	Person** temp = allocate(sizeof(Person) * s->top);
+	int dessus = s->top;
 
 
+	for (int i = 0; i < dessus; i++)
+	{
+		temp[i] = s->data[i];
+	}
+	bubbleSort(temp, dessus);
 
+
+	for (int i = 0; i < dessus; i++)
+	{
+		pop(s);
+	}
+	for (int i = 0; i < dessus; i++)
+	{
+		push(s, temp[dessus-i -1]);
+		printf("Age = %d\n", temp[dessus-1-i]->age);
+	}
+
+	memset(temp, NULL, sizeof(Person) * s->top);
+}
+
+void bubbleSort(Person** elements, int n)
+{
+	int switched = 0;
+
+	for (int i = 0; i < (n - 1); i++)
+	{
+		if (elements[i]->age > elements[i + 1]->age)
+		{
+			Person* temp = elements[i]; 
+			elements[i] = elements[i + 1]; 
+			elements[i + 1] = temp; 
+			switched = 1;
+		}
+		if (switched == 1)
+		{
+			switched = 0;
+			i = -1;
+		}
+	}
 }

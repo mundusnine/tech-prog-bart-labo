@@ -58,3 +58,6 @@ void reverseStack(Stack* s);
 * Triée la stack.La personne sur le haut/top est la plus jeune. Vous ne pouvez pas modifier la propriété data directement. Vous devez utiliser push,pop et/ou peek.
 */
 void sortStack(Stack* s);
+
+
+void bubbleSort(int elements[], int n);
