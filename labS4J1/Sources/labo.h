@@ -25,7 +25,6 @@ struct Stack_t
 	void** data;
 };
 
-
 typedef struct person_t {
 	char name[256];
 	size_t age;

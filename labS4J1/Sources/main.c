@@ -115,7 +115,7 @@ int test_code(FILE* f) {
 		}
 		push(s, &persons[0]);
 		push(s, &persons[0]);
-		if (s->top >= s->max_size) {
+		if (s->top > s->max_size) {
 			fprintf(stderr, "Vous ne prévenez pas l'overflow.\n");
 			pop(s);
 			pop(s);
