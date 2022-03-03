@@ -1,0 +1,147 @@
+//////////////////////////////stack & queue\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+Stack : LIFO = LAST IN FIRST OUT
+struct Stack{
+	void** data; // tableau
+	int max_size //etant donner qu'on a un tableau on a besoin d'un max
+	int top = -1// pour avoir la position de l'objet tout en haut de la stack
+}
+
+void push(Stack* s, int num){
+	if(s->top < s->max_size){
+		s->top++;
+		s->data[s->top] = num;
+	}
+}
+
+int pop(Stack* s){
+	if(s->tio > -1){
+		int a = s->data[s->top];
+		s->top--;
+		return a;
+	}	
+}
+
+Queue : FIFO = FIRST IN FIRST OUT
+void push(Queue* q, char* data){
+	Node* n = allocate(sizeof(Node));
+	Nnode* n2 = allocate(sizeof(Node));
+	n->data = data;
+	n2 = q->next;
+	n->next = q->next;
+	q->next = n;
+	if(q->prev == NULL){
+		q->prev = n;
+	}
+	else{
+		n2=>prev =n;
+	}
+}
+
+char* void pop(Queue* q){
+	if (q->prev != NULL){
+		char* data = q->prev->data;
+		node* temp = q->prev;
+		q->prev = temp->prev;
+		if(q->prev != NULL){
+			q->prev->next = NULL; //pour faire sur que sa ne crash pas le programme, aussi non s'il est NULL il va crash	
+		}
+		temp-prev = NULL;
+		temp->next = NULL;
+		return data;
+	}
+}
+//////////////////////////////Node\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+liste simplement chainer
+struct Node{
+	char* data;
+	Node* next;
+}
+void push( Node* head, char* data){
+	Node* n = allocate(sizeof(Node));
+	n->next = head->next;
+	head->next = n;	
+}
+
+char* void pop(Node* head){
+	Node* n = head->next;
+	head->next = n->next;
+	n->next = NULL;
+	return n->data;
+}
+
+liste doublement chainer
+struct Node{
+	char* data;
+	Node* next;
+	Node* prev;
+}
+void pushBack( Node* head, char* data){
+	Node* n = allocate(sizeof(Node));
+	n->data = data;
+	n->bext =NULL; // cyclique == n->next = head->next;
+	n->prev = head->prev;
+	head->prev = n;
+	if (n->prev->next != NULL){ // quand on dereference un pointeur, il faut faire sur qu'il ne soit pas NULL
+	n->prev->next = n;
+	};
+
+}
+char* void pop(Node* head){
+	Node* last = allocate(sizeof(Node));
+	if(head->prev != NULL){
+		last = head->prev;
+		head->prev = last->prev;
+		if(last->prev != NULL)
+		last->prev->next = NULL;
+	}
+}
+//////////////////////////////Grand O\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+for (int i =0; i < n;i++){
+	for(int c = 0; c < n; c++){
+	}
+}
+Il serait un O(n2), vus qu'il y a deux boucle qui on 'n' comme reference
+
+for (int i =0; i < n;i*=2){
+	for(int c = 0; c < n; c++){
+	}
+}
+Il serait factorielle, parce qu'il roule a l'infini
+
+for (int i =1; i < n;i*=2){
+	for(int c = 0; c < n; c++){
+	}
+}
+il serait O(log n) a cause que le i monte de plus en plus vite
+
+for (int i =0; i < n;i*=2){
+	for(int c = 0; c < i; c++){
+	}
+}
+n =16
+Il passe 31 fois dans la boucle, se serait O(log n * n) etant donner que c'est relatif au 'n'. On le fait plus que le n =16;
+
+for (int i =0; i < n; ++i){
+	for(int c = 0; c < n; c++){
+		for(int j = 0; j < n; j++){
+		}
+	}
+}
+c'est O(n3)
+
+for(int i = 0; i < n; i++){
+	for(int i =0; i <k; i++){
+		}
+	}
+ce serait un O(n * k) puisque la boucle avec le K est preceder de la boucle n
+//////////////////////////////Algorithmy tri\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+quicksort
+La valeur par defaut du Left = 0 et le right est la valeur de l'entendu
+Elle divise en 2 les elements quand elle s'appelle elles memes
+le pivot est l'element pour lequelle on veut trouver une position
+la section ou on trouve la position de notre pivot on va appeler sa le "partitionnage" et que l'on trouve l'etendu
+1er section : on trouve le pivot
+2ieme section : partitionnage
+3ieme section : quand on appelle recusivement la fonction sur les 2 nouveaux etendu
+4ieme section : la condition de fin
+
