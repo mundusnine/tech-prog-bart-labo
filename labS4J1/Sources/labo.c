@@ -98,4 +98,10 @@ void sortStack(Stack* s)
 	{
 		push(s, personne[i]);
 	}
+
+	for (int i = 0; i < count; i++)
+	{
+		Person* p = s->data[i];
+		printf("name: %s, age: %d\n", p->name, p->age);
+	}
 }
