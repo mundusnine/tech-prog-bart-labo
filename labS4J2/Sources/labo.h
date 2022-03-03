@@ -2,8 +2,8 @@
 #include <assert.h>
 
 #define HEAP_SIZE 1024 * 1024
-static uint8_t* heap = NULL;
-static size_t heap_top = 0;
+extern uint8_t* heap;
+extern size_t heap_top;
 
 static void* allocate(size_t size) {
 	size_t old_top = heap_top;
@@ -15,6 +15,15 @@ static void* allocate(size_t size) {
 /*
 * Déclarer une structure de donnée appeler Queue qui est un noeud comme le Node de la liste doublement chaînée. Déclaré aussi un noeud qui va avoir le nom Node.
 */
+typedef struct Node Node;
+
+struct Node {
+	Node* prev;
+	void* data;
+	Node* next;
+};
+
+typedef Queue;
 
 typedef struct person_t {
 	char name[256];
