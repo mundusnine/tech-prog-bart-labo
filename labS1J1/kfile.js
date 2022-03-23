@@ -11,6 +11,6 @@ project.cmd = true;
 project.addFile('Sources/**');
 project.setDebugDir('../Deployment');
 
-fs.copyFileSync(process.cwd()+'/labS1J1/test_input.txt','./Deployment/test_input.txt');
+fs.copyFileSync(process.cwd()+'/labS1J1/test_input.txt',process.cwd()+'/Deployment/test_input.txt');
 
 resolve(project);

@@ -58,12 +58,12 @@ static size_t getline(char** lineptr, size_t* n, FILE* stream) {
 	return p - bufptr - 1;
 }
 
-void test_code(FILE* f) {
+int test_code(FILE* f) {
 	char* ligne = NULL;
 	size_t len = 0;
 	size_t read;
 	int ligneCount = 0;
-
+	int result = 0;
 	static char lastLine[1024] = { 0 };
 	static int numbers[256] = { 0 };
 	static size_t num_len = 0;
@@ -102,6 +102,7 @@ void test_code(FILE* f) {
 				}
 				else {
 					printf("Tu as un erreur dans: sousTexte !\n");
+					result = 1;
 				}
 			}
 			else {
@@ -118,6 +119,7 @@ void test_code(FILE* f) {
 			}
 			else {
 				printf("Tu as un erreur dans: set_String !\n");
+				result = 1;
 			}
 			isGood += String_is_palindrome(&str);
 			if (ligneCount == 4 && isGood > 1) {
@@ -125,6 +127,7 @@ void test_code(FILE* f) {
 			}
 			else {
 				printf("Tu as un erreur dans: String_is_palindrome !\n");
+				result = 1;
 			}
 		}
 		else if (ligneCount <= 6) {
@@ -160,6 +163,7 @@ void test_code(FILE* f) {
 				}
 				else {
 					printf("Tu as un erreur dans: bubbleSort !\n");
+					result = 1;
 				}
 			}
 			else {
@@ -174,12 +178,13 @@ int main(int argc, char** argv) {
 
 
 	FILE* input = fopen("test_input.txt","r");
+	int result = 1;
 	if (input != NULL) {
-		test_code(input);
+		result = test_code(input);
 	}
 
 	if(input != NULL)
 		fclose(input);
 
-	return 0;
+	return result;
 }

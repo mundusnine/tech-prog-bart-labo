@@ -1,0 +1,20 @@
+name: Build & Test
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Get Submodules
+        run: git submodule update --init --recursive
+      - name: Set kmake to executable
+        run: chmod +x ./Tools/kmake_bin/kmake-linux64
+      - name: Compile and run test
+        run: ./Tools/kmake_bin/kmake-linux64 --from ./labS1J1 --run
+    
