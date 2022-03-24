@@ -1,0 +1,20 @@
+L55 = 5*O(n) = O(n)
+	L13 = O(n)
+	L15 = O(n)	
+	L21 = O(n)
+	L33 = O(n)
+	L39 = O(n)
+
+
+L50 = O(n) (Mais divise n / 2, ce qui cause un log plus tard)
+
+L52 = O(log n)
+L53 = O(log n)
+
+
+
+
+
+
+RÉSULTAT :
+O(log n)

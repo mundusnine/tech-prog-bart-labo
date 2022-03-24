@@ -1,0 +1,21 @@
+strlen = O(n)
+
+
+L19 = O(n)
+
+	L21 = O(n)
+		L23 O(n)
+
+
+RÉSULTAT =
+O(n) 
+
+Car L19 et L21 se partagent les boucles puisque plus il y a de mots (ex 10 mots, 100 lettres) plus la L21 va rouler
+tandis que plus il y a de lettres (ex 1 mot, 100 lettres) plus ce sera la L21 qui roulera.
+
+De plus, la L23 (Référence a L6) ne peut, au maximum, que doubler la qte de boucles puisque si (1 mot 100 lettres), L19 + L21 tournent environ 100 fois et la 
+L23 va rouler la qte de lettres de fois (100). Donc 100 + 100 AKA 2n.
+
+
+
+

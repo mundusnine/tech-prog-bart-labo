@@ -1,13 +1,32 @@
 #include <stdint.h>
 #include <assert.h>
 
+#define HEAP_SIZE 1024 * 1024
+extern uint8_t* heap;
+extern size_t heap_top;
 
-
-void* allocate(size_t size);
+static void* allocate(size_t size) {
+	size_t old_top = heap_top;
+	heap_top += size;
+	assert(heap_top <= HEAP_SIZE);
+	return &heap[old_top];
+}
 
 /*
-* Declarer une structure de donnee appeler Queue qui est un noeud comme le Node de la liste doublement chainee. Declare aussi un noeud qui va avoir le nom Node.
+Déclarer une structure de donnée appeler Node qui est un noeud comme le Node de la liste doublement chaînée. 
+Déclarer aussi un typedef de Node appelé Queue
 */
+
+typedef struct Node Node;
+struct Node
+{
+	Node* prev;
+	void* data;
+	Node* next;
+};
+
+typedef Node Queue;
+
 
 typedef struct person_t {
 	char name[256];
@@ -15,31 +34,31 @@ typedef struct person_t {
 } Person;
 
 /*
-* Ajouter l'element sur la queue/file.
+* Ajouter l'élément sur la queue/file.
 */
 void push(Queue* q, Node* n);
 
 /*
-* Enlever l'element de la queue/file et retourner le noeud. Si jamais il n'y a pas de noeud, retourner NULL.
+* Enlever l'élément de la queue/file et retourner le noeud. Si jamais il n'y a pas de noeud, retourner NULL.
 */
 Node* pop(Queue* q);
 
 
 
 /*
-* Retourner l'element de la fin de la queue/file sans l'enlever de la queue. Si jamais il n'y a pas d'element, retourner NULL.
+* Retourner l'élément de la fin de la queue/file sans l'enlever de la queue. Si jamais il n'y a pas d'élément, retourner NULL.
 */
 Node* peek(Queue* q);
 
 /*
-* Ajouter l'element sur la queue/file comme si elle serait une priority queue. Utiliser l'age afin de "trie" a chaque push.La personne au premier pop() est la plus jeune.
+* Ajouter l'élément sur la queue/file comme si elle serait une priority queue. Utiliser l'âge afin de "trié" à chaque push.La personne au premier pop() est la plus jeune.
 * On utilise pas une fonction de tri.
 */
 void pushAsPriorityQueue(Queue* q, Node* n);
 
 
 /*
-* Triee la queue. La personne au premier pop() est la plus jeune.Vous devez utiliser push,pop et/ou peek.
-* Vous ne pouvez pas utiliser le meme algorithme de tri que celui utiliser lors du labo sur la stack
+* Triée la queue. La personne au premier pop() est la plus jeune.Vous devez utiliser push,pop et/ou peek.
+* Vous ne pouvez pas utiliser le même algorithme de tri que celui utiliser lors du labo sur la stack
 */
 void sortQueue(Queue* q);

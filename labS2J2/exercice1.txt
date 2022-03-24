@@ -1,0 +1,17 @@
+
+
+L16 = O(n) -> Qui fait référence a ça (L6 = O(n))
+L17 = O(1) (Scale sur la taille max d'un int et non grosseur tableau. int max == 2147483647 == 11-12 boucles max. C'est donc une pseudo constante) 
+ 
+L21 = O(1) 
+
+L22 = O(1)
+
+L25 = O(n)
+
+L31 = O(1)
+L32 = O(1)
+
+
+RÉSULTAT =
+O(n)
