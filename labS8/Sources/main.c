@@ -11,6 +11,7 @@ static size_t getline(char** lineptr, size_t* n, FILE* stream) {
 	size_t size;
 	int c;
 
+
 	if (lineptr == NULL) {
 		return -1;
 	}
@@ -85,11 +86,15 @@ void* stack_pop(Stack* s) {
 void queue_init(Queue* q) {
 	q->next = q->prev = NULL;
 	q->count = 0;
+
 }
 void queue_push(Queue* q, void* data) {
+	// Node init
 	Node* n = allocate(sizeof(Node));
 	n->data = data;
 	n->prev = n->next = NULL;
+
+	// Si premier push
 	if (q->prev == NULL) {
 		q->prev = q->next = n;
 	}
@@ -124,7 +129,7 @@ int main(int argc, char** argv) {
 	heap = (uint8_t*)malloc(HEAP_SIZE);
 	assert(heap != NULL);
 	int n = 75;//ou 75 pour être slow
-	for (int i = 0; i <= n; ++i) 
+	for (int i = n; i > 0; --i)
 		printf("%lld\n", fibonacci(i));
 	//Pour vous corriger verifier les nombres ici: https://coolconversion.com/math/fibonacci-tables/75
 
