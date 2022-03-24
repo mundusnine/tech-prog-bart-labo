@@ -1,0 +1,6 @@
+ligne 10: (i = 0; i < n-1; ++i)      = O(n)
+
+ligne 13:  for (y = i+1; y < n; ++y) = O(n)
+
+Total : 			     = O(n^2)
+

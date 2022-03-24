@@ -1,0 +1,9 @@
+ligne 12: for (i = 0; arr[i]; ++i) 	= O(n)
+
+ligne 15: for (i = 0; i <= RANGE; ++i)  = O(k)
+
+ligne 19: for (i = 0; arr[i]; ++i)      = O(n)
+
+ligne 24: for (i = 0; arr[i]; ++i)      = O(n)
+
+Total:                                  = O(3n + k) donc O(n + k)

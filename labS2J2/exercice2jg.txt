@@ -1,0 +1,7 @@
+Ligne 06 :  while (str[i] != '\0') {	= O(n) (influencé pas le nombre de char dans la string)
+
+Ligne 19 :  while (1) {			= O(n) (aussi influencé par le nombre de char dans la string)
+
+Ligne 21 :  while (str[i] != ' ') {	= O(j) (influencé par le nombre de mots)
+
+Total :					= O(n + j)

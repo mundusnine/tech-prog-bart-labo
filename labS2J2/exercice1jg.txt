@@ -1,0 +1,20 @@
+Ligne 06 : for (int i = 1; i < n; i++)					= O(i)
+
+Ligne 17 : while (msd > 0) {						= O(1)
+
+Ligne 21 : for (int d_count = 0; d_count < NUM_DIGIT; d_count++) { 	= O(n)
+
+Ligne 22 : for (i = 0; i < RANGE; i++) {				= O(i)
+
+Ligne 25 : for (i = 0; i < n; i++) {					= O(i)
+
+Ligne 31 : for (k = 0; k < RANGE; k++) {				= O(k)
+
+Ligne 32 : for (j = 0; j < bucket_count[k]; j++) {			= O(j)
+
+Total :									= O(1) et O(3i + n + k + j) donc O(i + n + k + j)
+
+
+
+
+       
