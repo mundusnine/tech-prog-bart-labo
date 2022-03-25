@@ -70,5 +70,27 @@ int dfs(TreeNode* root, void* key)
 
 int bfs(TreeNode* root, void* key)
 {
+	Queue* theQueue = allocate(sizeof(Queue));
+	queue_init(theQueue);
+	queue_push(theQueue, root);
 
+	int nombreElementVisiter = 0;
+
+	while (theQueue->data != NULL)
+	{
+		nombreElementVisiter++;
+		TreeNode* nodeToCompare = queue_pop(theQueue);
+		if (nodeToCompare->data == key)
+		{
+			return nombreElementVisiter;
+		}	
+		if (nodeToCompare->left != NULL)
+		{
+			queue_push(theQueue, nodeToCompare->left);
+		}
+		if (nodeToCompare->right != NULL)
+		{
+			queue_push(theQueue, nodeToCompare->right);
+		}
+	}
 }
