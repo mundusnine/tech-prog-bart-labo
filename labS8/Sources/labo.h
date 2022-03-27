@@ -65,3 +65,8 @@ int dfs(TreeNode* root, void* key);
 * Programmer l'algorithme de breath first search afin de trouver la cle. Pour programmer cet algorithme, vous avez besoins d'une file/queue, ca definition est fourni.
 */
 int bfs(TreeNode* root, void* key);
+
+TreeNode* CheckFirstNodeNull(TreeNode* node, int etape, int etage, int first);
+TreeNode* CheckFirstNodeNullOpti(TreeNode* node, int etage, int first);
+
+TreeNode* FindKey(TreeNode* node, int etage, int first, int* nbNode, void* key);

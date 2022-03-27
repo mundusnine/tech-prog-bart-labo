@@ -132,10 +132,10 @@ int main(int argc, char** argv) {
 	tree_add_node(root, tree_create_node("B"));
 	tree_add_node(root, tree_create_node("C"));
 
-	tree_add_node(root->left, tree_create_node("D"));
-	tree_add_node(root->left, tree_create_node("E"));
+	tree_add_node(root, tree_create_node("D"));
+	tree_add_node(root, tree_create_node("E"));
 
-	tree_add_node(root->right, tree_create_node("F"));
+	tree_add_node(root, tree_create_node("F"));
 
 	int nodes_visited = dfs(root, "F");
 	if (nodes_visited == 6) {
