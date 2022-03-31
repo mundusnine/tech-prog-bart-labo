@@ -20,11 +20,10 @@ struct Node_t
 {
 	void* data;  // Data -- Contiendra une person_t
 	Node* next;  // Next data location
-
 };
 
 /*
-* Déclarer une structure de donnée appeler Node qui est un noeud d'une liste simplement chaînée.
+ Déclarer une structure de donnée appeler Node qui est un noeud d'une liste simplement chaînée.
 */
 
 
