@@ -18,6 +18,14 @@ void* stack_pop(Stack* s);
 * Vous devez definir une noeud que vous appelerez TreeNode. TreeNode va avoir une propriete data lui permettant de recevoir de l'information de different type. 
 * TreeNode a aussi deux propriete de type TreeNode nommer left et right.
 */
+typedef struct TreeNode TreeNode;
+struct TreeNode {
+	void* data;
+	TreeNode* right;
+	TreeNode* left;
+};
+
+
 
 typedef struct Node Node;
 typedef struct Node {
