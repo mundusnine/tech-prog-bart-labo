@@ -33,7 +33,53 @@ void add_adjacent_node(Node* root, Node* node)
 */
 int dfs(Node* root[], int len, Node* curr, void* key, Stack* s)
 {
-
+	if (curr == NULL)
+	{
+		int verif = 0;
+		
+		for (int i = 0; i < len; i++)
+		{
+			verif = dfs(root, len, root[i], key, s);
+			if (verif != 0)
+			{
+				break;
+			}
+		}
+	}
+	else
+	{
+		curr->visited = 1;
+		stack_push(s, curr);
+		if (curr->data == key)
+		{
+			return 1;
+		}
+		else
+		{
+			int count =0;
+			for (int i = 0; i < curr->len; i++)
+			{
+				if (curr->adj[i]->visited == 0)
+				{
+					int verif = 0;
+					verif = dfs(root, len, curr->adj[i], key, s);
+					if (verif != 0)
+					{
+						return verif;
+					}
+				}
+				else
+				{
+					count++;
+				}
+				if (count == curr->len)
+				{
+					stack_pop(s);
+					return 0;
+				}
+			}
+		}
+	}
 }
 
 /*
@@ -42,5 +88,22 @@ int dfs(Node* root[], int len, Node* curr, void* key, Stack* s)
 */
 int bfs(Node* root[], void* key, Stack* s)
 {
+	/*
+		1 push premier dans la q
+			node* n = root;
+		2 while (n != NULL)
+			n =  q_pop(q)
+			for(adj)
+				q_push(adj)
+				node adj.revpath =
+			n.visited =1;
+			if(n.data == key)
+				break
+			if(n == NULL)
+				bad
+			else
+				good
 
+
+	*/
 }
