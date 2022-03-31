@@ -68,10 +68,9 @@ int dfs(Node* root[], int len, Node* curr, void* key, Stack* s)
 						return verif;
 					}
 				}
-				else
-				{
-					count++;
-				}
+
+				count++;
+				
 				if (count == curr->len)
 				{
 					stack_pop(s);
