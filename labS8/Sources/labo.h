@@ -18,6 +18,13 @@ void* stack_pop(Stack* s);
 * Vous devez definir une noeud que vous appelerez TreeNode. TreeNode va avoir une propriete data lui permettant de recevoir de l'information de different type. 
 * TreeNode a aussi deux propriete de type TreeNode nommer left et right.
 */
+typedef struct TreeNode TreeNode;
+struct TreeNode
+{
+	void* data;
+	TreeNode* left;
+	TreeNode* right;
+};
 
 typedef struct Node Node;
 typedef struct Node {
@@ -30,6 +37,8 @@ typedef struct Node {
 void queue_init(Queue* q);
 void queue_push(Queue* q, void* data);
 void* queue_pop(Queue* q);
+
+
 
 /*
 * Programmer l'algorithme de fibonacci. Commencer par faire l'algorithme de base et par la suite ajouter la memoization.
