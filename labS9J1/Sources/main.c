@@ -86,10 +86,10 @@ int main(int argc, char** argv) {
 	add_adjacent_node(list[1], list[2]);
 	add_adjacent_node(list[2], list[1]);
 	add_adjacent_node(list[2], list[3]);
-	add_adjacent_node(list[2], list[4]);
-	add_adjacent_node(list[3], list[2]);
-	add_adjacent_node(list[4], list[5]);
-	add_adjacent_node(list[5], list[4]);
+	add_adjacent_node(list[2], list[4]); 
+	add_adjacent_node(list[3], list[2]); 
+	add_adjacent_node(list[4], list[5]); 
+	add_adjacent_node(list[5], list[4]); 
 
 	Stack s = stack_init(100);
 	//-----------FIRST CHECK-----------

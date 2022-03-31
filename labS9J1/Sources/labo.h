@@ -27,6 +27,7 @@ typedef struct QNode {
 	size_t count;
 }Queue;
 
+
 void queue_init(Queue* q);
 void queue_push(Queue* q, void* data);
 void* queue_pop(Queue* q);
@@ -37,8 +38,14 @@ void* queue_pop(Queue* q);
 * une propriete de type QNode qui sera nommer revPath. Cette derni�re, sera utilis� pour rebrousser chemin lorsque nous ferons l'algorithme bfs.
 */
 
-
-
+typedef struct Node Node;
+typedef struct Node {
+	void* data;
+	Node* adj[UINT8_MAX];
+	uint8_t len;
+	uint8_t visited;
+	QNode* revPath;
+};
 
 /*
 * Creer un Noeud, assigner lui la valeur de data, faite un memset 0 sur adj, visited a faux, len a 0, allouer de la m�moire pour le QNode et assurer vous de mettre la propiete prev de QNode a NULL.
