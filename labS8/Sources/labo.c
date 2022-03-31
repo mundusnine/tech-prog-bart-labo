@@ -60,7 +60,28 @@ void tree_add_node(TreeNode* root, TreeNode* node)
 */
 int dfs(TreeNode* root, void* key)
 {
+	int nodePosition = 0;
+	Stack newStack = stack_init(6);
+	stack_push(&newStack, root);
 
+	while (newStack.top > -1)
+	{
+		TreeNode* currNode = stack_pop(&newStack);
+		nodePosition++;
+		
+		if (currNode->data == key)
+		{
+			return nodePosition;
+		}
+		if (currNode->right != NULL)
+		{
+			stack_push(&newStack, currNode->right);
+		}
+		if (currNode->left != NULL)
+		{
+			stack_push(&newStack, currNode->left);
+		}
+	}
 }
 
 /*
@@ -68,6 +89,25 @@ int dfs(TreeNode* root, void* key)
 */
 int bfs(TreeNode* root, void* key)
 {
+	Queue* newQ = allocate(sizeof(Queue));
+	queue_init(newQ);
+	queue_push(newQ, root);
 
+	while (newQ->prev != NULL)
+	{
+		TreeNode* currNode = queue_pop(newQ);
+		if (currNode->data == key)
+		{
+			return newQ->count;
+		}
+		if (currNode->left != NULL)
+		{
+			queue_push(newQ, currNode->left);
+		}
+		if (currNode->right != NULL)
+		{
+			queue_push(newQ, currNode->right);
+		}
+	}
 }
 
