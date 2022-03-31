@@ -14,8 +14,8 @@ Node* create_node(void* data)
 	memset(n->adj, 0, 1);
 	n->len = 0;
 	n->visited = 0;
-	allocate(sizeof(n->revPath));
-	n->revPath.prev = NULL;
+	n->revPath = allocate(sizeof(n->revPath));
+	n->revPath->prev = NULL;
 
 	return n;
 }
@@ -35,48 +35,94 @@ Pour programmer cet algorithme, vous avez besoins d'une pile/stack, ca definitio
 * La Stack devrait contenir la liste en ordre inverse de celle parcouru. 
 	i.e. si le chemin est A -> B -> C la stack avec son pop devrait retourner C -> B -> A
 */
+
+// fonctionnel
 int dfs(Node* root[], int len, Node* curr, void* key, Stack* s)
 {
-	Node* current = root[0];
+	Node* temp = root[0];
+	while (temp->data != key)
+	{
+		stack_push(s, temp); // +1
+		temp->visited = 1;
+
+		
+		int count = 0;
+		for (int i = 0; i < temp->len; i++)
+		{
+			if (temp->adj[i]->visited == 0)
+			{
+				temp = temp->adj[i];
+				break;
+			}
+			count++;
+		}
+
+		if (temp->len == count)
+		{
+			stack_pop(s); // -1
+			temp = stack_pop(s);
+
+		}
+	}
+
+	// Lorsque while est vrai
+	stack_push(s, temp);
 
 
-	// Check initial 
-	stack_push(s, current);
-	current->visited = 1;
-	if (key == current->data)
+
+	/*
+	stack_push(s, root[0]);
+	root[0]->visited = 1;
+	if (root[0]->data == key)
 	{
 		return;
 	}
-	// Ici, on a regardé si la node #1 contenait la key
 
-	int pos = 0;
-	int Adjpos = 0;
-	
-	
-	// Boucle pour les nodes (len - 1) restants
-	for (int i = 0; i < len-1; i++)
+	// E
+	Node* temp = root[0]->adj[0];
+	stack_push(s, temp);
+	temp->visited = 1;
+	if (temp->data == key)
 	{
-		// si la node adjacente au current est != NULL et n'est pas visitée
-		if (current->adj[Adjpos] != NULL && current->adj[Adjpos]->visited == 0)
-		{
-			current = current->adj[Adjpos];
-			current->visited = 1;
-			stack_push(s, current);
+		return;
+	}
 
-			if (current->data == key)
+	// f
+	if (temp->len > 0 && temp->adj[0]->visited == 0)
+	{
+		temp = temp->adj[0];
+		stack_push(s, temp);
+		temp->visited = 1;
+		if (temp->data == key)
+		{
+			return;
+		}
+	}
+
+	// Si son voisin est visité, va visiter le 2e s'il en a un et n'est pas visité
+	if (temp->len > 0 && temp->adj[0]->visited == 1)
+	{
+		if (temp->len > 1 && temp->adj[1]->visited == 0)
+		{
+			temp = temp->adj[1];
+			stack_push(s, temp);
+			temp->visited = 1;
+			if (temp->data == key)
 			{
 				return;
 			}
 		}
-		else if (current->adj[Adjpos] != NULL 
-			&& current->adj[Adjpos]->visited != 0)
+		else // Sinon ça chie, donc retourner a root
 		{
-			Adjpos++;
-			i--;
+			temp = root[0];
 		}
 	}
-	
-	
+
+	temp = stack_pop(s); 
+
+	temp = stack_pop(s);
+	*/
+
 }
 
 /*

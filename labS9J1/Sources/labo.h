@@ -43,7 +43,7 @@ struct Node
 	Node* adj[UINT8_MAX];
 	uint8_t len; // Qte nodes dans liste adjacence
 	uint8_t visited; // Pseude bool vrai faux
-	QNode revPath;
+	QNode* revPath;
 };
 
 
