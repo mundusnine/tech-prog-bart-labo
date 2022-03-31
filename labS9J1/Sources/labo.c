@@ -15,6 +15,8 @@ Node* create_node(void* data)
 	myNode->len = 0;
 	QNode* myQNode = allocate(sizeof(QNode));
 	myQNode->prev = NULL;
+	myQNode->data = NULL;
+	myNode->revPath = myQNode;
 	return myNode;
 }
 
@@ -36,7 +38,6 @@ int dfs(Node* root[], int len, Node* curr, void* key, Stack* s)
 	if (curr == NULL)
 	{
 		int verif = 0;
-		
 		for (int i = 0; i < len; i++)
 		{
 			verif = dfs(root, len, root[i], key, s);
@@ -68,9 +69,7 @@ int dfs(Node* root[], int len, Node* curr, void* key, Stack* s)
 						return verif;
 					}
 				}
-
 				count++;
-				
 				if (count == curr->len)
 				{
 					stack_pop(s);
@@ -102,7 +101,35 @@ int bfs(Node* root[], void* key, Stack* s)
 				bad
 			else
 				good
-
-
 	*/
+	Queue* q = allocate(sizeof(Queue));
+	queue_init(q);
+
+	Node* n = root[0];
+	queue_push(q, n);
+	int count = 0;
+	while (n != NULL)
+	{
+		n = queue_pop(q);
+		n->visited = 1;
+		count++;
+		if (n->data == key)
+		{
+			break;
+		}
+		for (int i = 0; i < n->len; i++)
+		{
+			if (!n->adj[i]->visited) {
+				queue_push(q, n->adj[i]);
+				n->adj[i]->revPath->data = n;
+			}
+		}
+		
+	}
+	while (n != NULL)
+	{
+		stack_push(s, n);
+		n = n->revPath->data;
+	}
+	return count;
 }
