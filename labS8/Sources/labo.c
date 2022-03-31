@@ -67,7 +67,7 @@ int dfs(TreeNode* root, void* key)
 
 int bfs(TreeNode* root, void* key)
 {
-	Queue* q;
+	Queue* q = allocate(sizeof(Queue));
 	queue_init(q);
 	queue_push(q, root);
 	int count = 0;
