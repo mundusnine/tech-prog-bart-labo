@@ -37,7 +37,16 @@ void* queue_pop(Queue* q);
 * une propriete de type QNode qui sera nommer revPath. Cette derni�re, sera utilis� pour rebrousser chemin lorsque nous ferons l'algorithme bfs.
 */
 
+typedef struct Node Node;
 
+struct Node
+{
+	void* data;
+	Node* adj[UINT8_MAX];
+	uint8_t len;
+	uint8_t visited;
+	QNode* revPath;
+};
 
 
 /*
@@ -55,10 +64,58 @@ void add_adjacent_node(Node* root, Node* node);
 * Programmer l'algorithme de depth first search afin de trouver la cle. Pour programmer cet algorithme, vous avez besoins d'une pile/stack, ca definition est fourni.
 * La Stack devrait contenir la liste en ordre inverse de celle parcouru. i.e. si le chemin est A -> B -> C la stack avec son pop devrait retourner C -> B -> A
 */
+
+//DFS pseudo code
+//1 : on pousse le noeud au debut sur la stack
+//2 : marquer comme vu
+//3 : pour son premier edge/lien
+//	a. est-ce que c'est le noeud viser?
+//		i. si oui on a terminer
+//	b. est-ce qu'on la vu?
+//		i. si on l'avait vue on continue au prochain edge/lien de ce noeud
+//		ii. si jamais il n"y a plus de edge et que le noeud est bvu, on le pop de la stack(il ne fait pas partie du chemin)
+//	c, sinon, on push le noeud sur la stack
+//	d. puis on retourne a l'etape 3
+
 int dfs(Node* root[], int len, Node* curr, void* key, Stack* s);
 
 /*
 * Programmer l'algorithme de breath first search afin de trouver la cle. Pour programmer cet algorithme, vous avez besoins d'une file/queue, ca definition est fourni.
 * La Stack devrait contenir la liste en ordre du chemin parcouru. i.e. si le chemin est A -> B -> C la stack avec son pop devrait retourner A -> B -> C
 */
+
+//BFS pseudo code
+//1 : push premier dans la Q
+//		Node* n = root[0];
+//2 : while(n != NULL)
+//	{
+//		n = Queue_pop(Q);
+//		n->visited = 1;
+//		if(n->data == key)
+//		{
+//			break;
+//		}
+//		for(adjante)
+//		{
+//			Queue_push(adjacent);
+//			nodeAdjacent->revPath->data = n;
+//		}
+//		
+//	}
+//	if(n == NULL)
+//	{
+//		bad
+//	}
+//	else
+//	{
+//		good
+//	}
+//	rebrousser chemin
+//	
 int bfs(Node* root[], void* key, Stack* s);
+
+//jigstra
+// 1 : calulculer le cout des noeuds adjacents
+// 2 : choisir le noeud qui coute le moins
+// 3 : se rappeler du chemin
+//
