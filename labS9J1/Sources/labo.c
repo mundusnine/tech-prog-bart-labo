@@ -107,6 +107,7 @@ int bfs(Node* root[], void* key, Stack* s)
 
 	Node* n = root[0];
 	queue_push(q, n);
+
 	int count = 0;
 	while (n != NULL)
 	{
@@ -119,12 +120,15 @@ int bfs(Node* root[], void* key, Stack* s)
 		}
 		for (int i = 0; i < n->len; i++)
 		{
-			if (!n->adj[i]->visited) {
+			if (!n->adj[i]->visited) 
+			{
 				queue_push(q, n->adj[i]);
-				n->adj[i]->revPath->data = n;
+				if (n->adj[i]->revPath->data == NULL)
+				{
+					n->adj[i]->revPath->data = n;//THIS
+				}
 			}
 		}
-		
 	}
 	while (n != NULL)
 	{
