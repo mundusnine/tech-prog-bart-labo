@@ -179,7 +179,7 @@ int main(int argc, char** argv) {
 			printf("ERROR: Vous avez un erreur dans la fonction breath first search\n");
 	}
 
-	if (nodes_visited == 2 && nodes_visited2 == 3) {
+	if (nodes_visited == 2 && nodes_visited2 == 4) {
 		printf("Vous avez potentiellement bien programmer la fonction breath first search\n");
 	}
 	else {
