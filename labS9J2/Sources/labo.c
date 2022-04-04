@@ -46,7 +46,8 @@ AdjMatrix* create_graph(size_t max_nodes)
 */
 void add_node(AdjMatrix* graph, void* data)
 {
-
+	graph->nodes[graph->len].data = data;
+	graph->len++;
 }
 
 /*
@@ -54,7 +55,7 @@ void add_node(AdjMatrix* graph, void* data)
 */
 void add_edge(AdjMatrix* graph, int fromNode, int toNode, uint8_t cost)
 {
-
+	graph->adjGraph[fromNode][toNode] = cost;
 }
 
 /*
