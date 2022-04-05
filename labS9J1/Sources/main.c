@@ -152,7 +152,8 @@ int main(int argc, char** argv) {
 	add_adjacent_node(list[0], list[1]);
 
 	list[1]->len = 0;
-	nodes_visited = bfs(list, "F",&s);
+	bfs(list, "F", &s);
+	nodes_visited = s.top;
 	for (int i = 0; i < nodes_visited+1; ++i) {
 		Node* n = stack_pop(&s);
 		if (n->data != table[i])

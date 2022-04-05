@@ -39,14 +39,38 @@ int dfs(Node* root[], int len, Node* curr, void* key, Stack* s)
 	{
 		for (int i = 0; i < len; i++)
 		{
-			dfs(root, len, root[i], key, s);
+			int found = dfs(root, len, root[i], key, s);
+			if (found != 0)
+			{
+				return s->top;
+			}
 		}
 	}
 
-
-
-	
-	
+	else
+	{
+		curr->visited = 1;
+		stack_push(s, curr);
+		if (curr->data == key)
+		{
+			return 1;
+		}
+		else
+		{
+			for (int i = 0; i < curr->len; i++)
+			{
+				if (curr->adj[i]->visited != 1)
+				{
+					int found = dfs(root, len, curr->adj[i], key, s);
+					if (found != 0)
+					{
+						return 1;
+					}
+				}
+			}
+			stack_pop(s);
+		}
+	}
 	return 0;
 }
 
@@ -57,5 +81,47 @@ int dfs(Node* root[], int len, Node* curr, void* key, Stack* s)
 
 int bfs(Node* root[], void* key, Stack* s)
 {
-	return 0;
+	while (s->top != -1)
+	{
+		stack_pop(s);
+	}
+	
+	Node* n = root[0];
+	
+	Queue* q = allocate(sizeof(Queue));
+	queue_init(q);
+	queue_push(q, n);
+	
+	while (n != NULL)
+	{
+		n = queue_pop(q);
+		n->visited = 1;
+		if (n->data == key)
+		{
+			break;
+		}
+		
+		for (int i = 0; i < n->len; i++)
+		{
+			if (n->adj[i]->visited != 1)
+			{
+				queue_push(q, n->adj[i]);
+				n->adj[i]->revPath->data = n;
+			}
+		}
+	}
+
+	if (n == NULL)
+	{
+		return 0;
+	}
+	else
+	{
+		while (n != NULL)
+		{
+			stack_push(s, n);
+			n = n->revPath->data;
+		}
+		return s->top + 1;
+	}
 }
