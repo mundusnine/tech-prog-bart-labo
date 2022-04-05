@@ -21,7 +21,7 @@ void* stack_pop(Stack* s);
 
 typedef struct QNode QNode;
 typedef struct QNode {
-	void* data;
+	void* data; //contient pointeur vers la node precedente
 	QNode* prev;
 	QNode* next;
 	size_t count;
