@@ -54,11 +54,8 @@ int dfs(Node* root[], int len, Node* curr, void* key, Stack* s)
 					return 1;
 				}
 			}
-			if (i == curr->len - 1 && curr->adj[i]->visited == 1)
-			{
-				stack_pop(s);
-			}
 		}
+		stack_pop(s);
 		return 0;
 	}
 }
