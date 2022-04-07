@@ -78,8 +78,21 @@ void dijkstra(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* sol
 		}
 		for (int i = 0; i < graph->len; i++)
 		{
-			
+			if (graph->adjGraph[n->index][i] != 0)
+			{
+				if (graph->nodes[i].cost == 0 && graph->nodes[i].visited != 1 || graph->nodes[i].cost > graph->adjGraph[n->index][i] + graph->nodes[n->index].cost)
+				{
+					graph->nodes[i].cost = graph->nodes[n->index].cost + graph->adjGraph[n->index][i];
+					graph->nodes[i].path_from = n->index;
+
+					queue_push(q, &graph->nodes[i]);
+				}
+			}
 		}
 
+	}
+	if (good == 0)
+	{
+		return NULL;
 	}
 }
