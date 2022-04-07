@@ -37,6 +37,15 @@ void* queue_pop(Queue* q);
 * une propriete de type uint8_t nommer path_from. Cette derniere, sera utiliser pour rebrousser chemin.
 */
 
+typedef struct Node Node;
+struct Node
+{
+	void* data;
+	uint8_t cost;
+	uint8_t visited;
+	uint8_t path_from;
+};
+
 typedef struct AdjMatrix AdjMatrix;
 
 struct AdjMatrix {
@@ -47,8 +56,7 @@ struct AdjMatrix {
 };
 
 
-
-
+int GetNodeIdx(AdjMatrix* graph, Node* nPtr);
 
 /*
 * Creer une matrice d'adjacence. Mettre len a 0. Mettre max_size a max_nodes.
