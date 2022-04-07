@@ -88,5 +88,6 @@ void add_edge(AdjMatrix* graph, int fromNode, int toNode, uint8_t cost)
 
 void dijkstra(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* solvedPath)
 {
-
+	// Similaire au BreathFirstSearch 
+	// Il faut ajouter la notion de coût aux déplacements graph->nodes->cost;
 }
