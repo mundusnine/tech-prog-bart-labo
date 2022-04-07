@@ -67,7 +67,7 @@ void dijkstra(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* sol
 	{
 		graph->nodes[i].visited = 0;
 		graph->nodes[i].path_from = NULL;
-		graph->nodes[i].cost = 0;
+		graph->nodes[i].cost = UINT8_MAX;
 	}
 	while (solvedPath->top > -1)
 	{
@@ -75,38 +75,39 @@ void dijkstra(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* sol
 	}
 
 	Queue* pathQ = allocate(sizeof(Queue));
+	Queue* pathQNum = allocate(sizeof(Queue));
 	queue_init(pathQ);
+	queue_init(pathQNum);
 	Node* n = &graph->nodes[startNodeIndex];
 	queue_push(pathQ,n);
-
-	int currentIndex = startNodeIndex;
-	int tempoIndex;
-	int cost = 100;
-	int prevCost =0;
+	queue_push(pathQNum, startNodeIndex);
+	n->cost = 0;
+	int currentIndex = -1;
+	int cost = -1;
 	while (n != NULL)
 	{
 		n = queue_pop(pathQ);
+		currentIndex = queue_pop(pathQNum);
 		n->visited = 1;
-		cost = 100;
 		if (n == &graph->nodes[endNodeIndex])
 		{
 			break;
 		}
 		for (int i = 0; i < graph->len; i++)
 		{
-			if (cost > graph->adjGraph[currentIndex][i] && graph->nodes[i].visited!=1 && graph->adjGraph[currentIndex][i] !=0)
+			if (!graph->nodes[i].visited)
 			{
-				cost = graph->adjGraph[currentIndex][i];
-				tempoIndex = i;
+				cost = graph->nodes[currentIndex].cost + graph->adjGraph[currentIndex][i];
+				if (graph->nodes[i].cost > cost && graph->nodes[currentIndex].cost != cost)
+				{
+					queue_push(pathQ, &graph->nodes[i]);
+					queue_push(pathQNum, i);
+					graph->nodes[i].cost = cost;//THIS
+					graph->nodes[i].path_from = currentIndex;
+				}
 			}
 		}
-		graph->nodes[tempoIndex].path_from = currentIndex;
-		prevCost = graph->nodes[currentIndex].cost;
-		currentIndex = tempoIndex;
-		graph->nodes[currentIndex].cost = cost + prevCost;
-		queue_push(pathQ, &graph->nodes[currentIndex]);
-	} 
-
+	}
 	while (n->path_from != NULL)
 	{
 		stack_push(solvedPath, n);
