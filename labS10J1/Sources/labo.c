@@ -135,7 +135,7 @@ void astar(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* solved
 	int currentIndex = -1;
 	int cost = -1;
 	while (n != NULL)
-	{
+	{ 
 		n = queue_pop(pathQ);
 		currentIndex = queue_pop(pathQNum);
 		n->visited = 1;
