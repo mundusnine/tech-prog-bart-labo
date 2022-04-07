@@ -20,7 +20,8 @@ AdjMatrix* create_graph(size_t max_nodes)
 	for (int i = 0; i < adjMatrix->max_size; i++)
 	{
 		adjMatrix->nodes[i].cost = 0;
-		adjMatrix->nodes[i].path_from = 0;
+		adjMatrix->nodes[i].graphGroup = UINT8_MAX;
+		adjMatrix->nodes[i].path_from = UINT8_MAX;
 		adjMatrix->nodes[i].visited = 0;
 		adjMatrix->nodes[i].data = NULL;
 	}
@@ -64,7 +65,47 @@ void add_edge(AdjMatrix* graph, int fromNode, int toNode, uint8_t cost)
 */
 void build_groups(AdjMatrix* graph)
 {
+	Queue* pathQ = allocate(sizeof(Queue));
+	Queue* pathQNum = allocate(sizeof(Queue));
+	queue_init(pathQ);
+	queue_init(pathQNum);
+	Node* n = &graph->nodes[0];
+	queue_push(pathQ, n);
+	queue_push(pathQNum, 0);
+	int currentIndex = -1;
 
+	int graphGroups = 0;
+
+	for (int i = 0; i < graph->len; i++)
+	{
+		graph->nodes[i].visited = 0;
+	}
+
+	for (int i = 0; i < graph->len; i++)
+	{
+		if (graph->nodes[i].visited == 0)
+		{
+			while (n != NULL)
+			{
+				n = queue_pop(pathQ);
+				currentIndex = queue_pop(pathQNum);
+				if (n != NULL)
+				{
+					n->visited = 1;
+					for (int i2 = 0; i2 < graph->len; i2++)
+					{
+						if (graph->nodes[i2].visited == 0 && graph->adjGraph[currentIndex][i2] > 0)
+						{
+							graph->nodes[i2].graphGroup = graphGroups;
+							queue_push(pathQ, &graph->nodes[i2]);
+							queue_push(pathQNum, i2);
+						}
+					}
+				}
+			}
+			graphGroups++;
+		}
+	}
 }
 
 /*
