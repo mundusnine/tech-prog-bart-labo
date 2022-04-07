@@ -12,7 +12,7 @@ long long fibonacci(int n)
 	}
 
 
-	tab[n] = fibonacci(n - 1) + fibonacci(n - 2);
+	//tab[n] = fibonacci(n - 1) + fibonacci(n - 2);
 	return tab[n];
 }
 

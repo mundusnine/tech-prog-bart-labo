@@ -23,6 +23,7 @@ Node* create_node(void* data)
 /*
 * Ajouter le node dans la liste d'adjacence de root.
 */
+
 void add_adjacent_node(Node* root, Node* node)
 {
 	root->adj[root->len] = node;
@@ -40,98 +41,113 @@ Pour programmer cet algorithme, vous avez besoins d'une pile/stack, ca definitio
 int dfs(Node* root[], int len, Node* curr, void* key, Stack* s)
 {
 	Node* temp = root[0];
-	while (temp->data != key)
+	while (temp->data != key) // Tant que la clé n'est pas trouvée
 	{
-		stack_push(s, temp); // +1
 		temp->visited = 1;
-
-		
-		int count = 0;
+		int lenComp = 0;
 		for (int i = 0; i < temp->len; i++)
 		{
-			if (temp->adj[i]->visited == 0)
+			if (temp->adj[i]->visited == 1)
 			{
-				temp = temp->adj[i];
+				lenComp++;
+			}
+		}
+
+		if (lenComp == temp->len)
+		{
+			temp = stack_pop(s);
+		}
+		else
+		{
+			stack_push(s, temp); 
+		
+		}
+		
+		
+		int count = 0;
+		for (int i = 0; i < temp->len; i++) // Pour une qte de fois = à la qte de nodes adjacentes
+		{
+			if (temp->adj[i]->visited == 0) // Si la node adjacente n'est pas visitée
+			{
+				temp = temp->adj[i]; // Temp = son adjacente
 				break;
 			}
 			count++;
 		}
+		
 
 		if (temp->len == count)
 		{
-			stack_pop(s); // -1
-			temp = stack_pop(s);
-
-		}
-	}
-
-	// Lorsque while est vrai
-	stack_push(s, temp);
-
-
-
-	/*
-	stack_push(s, root[0]);
-	root[0]->visited = 1;
-	if (root[0]->data == key)
-	{
-		return;
-	}
-
-	// E
-	Node* temp = root[0]->adj[0];
-	stack_push(s, temp);
-	temp->visited = 1;
-	if (temp->data == key)
-	{
-		return;
-	}
-
-	// f
-	if (temp->len > 0 && temp->adj[0]->visited == 0)
-	{
-		temp = temp->adj[0];
-		stack_push(s, temp);
-		temp->visited = 1;
-		if (temp->data == key)
-		{
-			return;
-		}
-	}
-
-	// Si son voisin est visité, va visiter le 2e s'il en a un et n'est pas visité
-	if (temp->len > 0 && temp->adj[0]->visited == 1)
-	{
-		if (temp->len > 1 && temp->adj[1]->visited == 0)
-		{
-			temp = temp->adj[1];
-			stack_push(s, temp);
-			temp->visited = 1;
-			if (temp->data == key)
+			int adjCount = 0;
+			for (int i = 0; i < temp->len; i++)
 			{
-				return;
+				if (temp->adj[i]->visited == 1)
+				{
+					adjCount = 1;
+				}
+			}
+
+			if (adjCount != 1)
+			{
+				temp = stack_pop(s);
 			}
 		}
-		else // Sinon ça chie, donc retourner a root
-		{
-			temp = root[0];
-		}
 	}
 
-	temp = stack_pop(s); 
-
-	temp = stack_pop(s);
-	*/
-
+	stack_push(s, temp);
 }
 
 /*
-* Programmer l'algorithme de breath first search afin de trouver la cle. 
-Pour programmer cet algorithme, vous avez besoins d'une file/queue, sa definition est fourni.
+Programmer l'algorithme de breath first search afin de trouver la cle. 
+Pour programmer cet algorithme, vous avez besoins d'une file/queue, 
+	sa definition est fourni.
 * La Stack devrait contenir la liste en ordre du chemin parcouru. 
 	i.e. si le chemin est A -> B -> C la stack avec son pop devrait retourner A -> B -> C
 */
-int bfs(Node* root[], void* key, Stack* s)
+int bfs(Node* root[], void* key, Stack* s) // Queue first in first out ***
 {
+	while (s->top != -1)
+	{
+		stack_pop(s);
+	}
+	Queue* q = allocate(sizeof(Queue));
+	queue_init(q);
+	queue_push(q, root[0]);
+	Node* t = NULL;
 
+	int o = 1;
+	while (o)
+	{
+		t = queue_pop(q);
+		t->visited = 1;
+
+		if (t->data == key)
+		{
+			break;
+		}
+		for (int i = 0; i < t->len; i++)
+		{
+			if (t->adj[i]->visited == 0)
+			{
+				queue_push(q, t->adj[i]);
+				t->adj[i]->revPath->data = t;
+			}
+			
+		}
+	}
+	
+	int nodes_visited = 0;
+	while (t != root[0])
+	{
+		stack_push(s, t);
+		t = t->revPath->data;
+		nodes_visited++;
+	}
+	stack_push(s, t);
+	nodes_visited++;
+
+	return nodes_visited;
+
+	
 }
+

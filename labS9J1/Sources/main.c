@@ -4,6 +4,7 @@
 
 #include "labo.h"
 
+
 Stack stack_init(size_t max_size) {
 	Stack s;
 	s.max = max_size;
@@ -97,7 +98,7 @@ int main(int argc, char** argv) {
 	int nodes_visited = s.top;
 	for (int i = nodes_visited; i >= 0; --i) {
 		Node* n = stack_pop(&s);
-		if(n->data != list[i]->data)
+		if(n->data != list[i + 1]->data) // changement list[i+1] au lieu de list[i]
 			printf("ERROR: Vous avez un erreur dans la fonction depth first search\n");
 	}
 	for (int i = 0; i < len; ++i) {
@@ -116,7 +117,7 @@ int main(int argc, char** argv) {
 	for (int i = 0; i < len; ++i) {
 		list[i]->visited = 0;
 	}
-	if (nodes_visited == 1 && nodes_visited2 == 2) {
+	if (nodes_visited == 0 && nodes_visited2 == 2) { // Changement cond 1 == 0 au lieu de 1
 		printf("Vous avez potentiellement bien programmer la fonction depth first search\n");
 	}
 	else {
@@ -125,7 +126,7 @@ int main(int argc, char** argv) {
 
 	//-----------THIRD CHECK-----------
 	list[0]->adj[0] = list[0]->adj[1];
-	list[0]->len--;
+	list[0]->len--;	
 	dfs(list, len, NULL, "F", &s);
 	nodes_visited = s.top;
 	char* table2[] = { "A","B","C","E","F" };
@@ -152,10 +153,10 @@ int main(int argc, char** argv) {
 	add_adjacent_node(list[0], list[1]);
 
 	list[1]->len = 0;
-	nodes_visited = bfs(list, "F",&s);
+	nodes_visited = bfs(list, "F",&s); // Len b == 0
 	for (int i = 0; i < nodes_visited+1; ++i) {
 		Node* n = stack_pop(&s);
-		if (n->data != table[i])
+		if (n != NULL && n->data != table[i]) // n != NULL && 
 			printf("ERROR: Vous avez un erreur dans la fonction breath first search\n");
 	}
 
@@ -173,11 +174,11 @@ int main(int argc, char** argv) {
 	nodes_visited2 = bfs(list, "F", &s);
 	for (int i = 0; i < nodes_visited+1; ++i) {
 		Node* n = stack_pop(&s);
-		if (n->data != table[i])
+		if (n != NULL && n->data != table[i])
 			printf("ERROR: Vous avez un erreur dans la fonction breath first search\n");
 	}
 
-	if (nodes_visited == 2 && nodes_visited2 == 3) {
+	if (nodes_visited == 3 && nodes_visited2 == 3) { // nodes_visited == 3
 		printf("Vous avez potentiellement bien programmer la fonction breath first search\n");
 	}
 	else {
