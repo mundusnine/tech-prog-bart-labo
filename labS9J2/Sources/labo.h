@@ -37,6 +37,14 @@ void* queue_pop(Queue* q);
 * une propriete de type uint8_t nommer path_from. Cette derniere, sera utiliser pour rebrousser chemin.
 */
 
+typedef struct Node Node;
+typedef struct Node {
+	void* data;
+	uint8_t cost;
+	uint8_t visited;
+	uint8_t path_from;
+};
+
 typedef struct AdjMatrix AdjMatrix;
 
 struct AdjMatrix {
