@@ -152,8 +152,9 @@ int main(int argc, char** argv) {
 	add_adjacent_node(list[0], list[1]);
 
 	list[1]->len = 0;
-	nodes_visited = bfs(list, "F",&s);
-	for (int i = 0; i < nodes_visited+1; ++i) {
+	bfs(list, "F",&s);
+	nodes_visited = s.top;
+	for (int i = 0; i < nodes_visited; ++i) {
 		Node* n = stack_pop(&s);
 		if (n->data != table[i])
 			printf("ERROR: Vous avez un erreur dans la fonction breath first search\n");
@@ -162,6 +163,7 @@ int main(int argc, char** argv) {
 
 	for (int i = 0; i < len; ++i) {
 		list[i]->visited = 0;
+		list[i]->revPath->data = NULL;  //THIS Reset des revpath
 	}
 
 	//-----------SECOND CHECK-----------
@@ -177,7 +179,7 @@ int main(int argc, char** argv) {
 			printf("ERROR: Vous avez un erreur dans la fonction breath first search\n");
 	}
 
-	if (nodes_visited == 2 && nodes_visited2 == 3) {
+	if (nodes_visited == 2 && nodes_visited2 == 4) {
 		printf("Vous avez potentiellement bien programmer la fonction breath first search\n");
 	}
 	else {
@@ -186,6 +188,7 @@ int main(int argc, char** argv) {
 	
 	for (int i = 0; i < len; ++i) {
 		list[i]->visited = 0;
+		list[i]->revPath->data = NULL; //THIS Reset des revpath
 	}
 
 	//-----------THIRD CHECK-----------
@@ -194,7 +197,7 @@ int main(int argc, char** argv) {
 	add_adjacent_node(list[1], list[2]);
 
 	bfs(list, "F", &s);
-	for (int i = 0; -1 < s.top; ++i) {
+	for (int i = 0; i < s.top; ++i) {
 		Node* n = stack_pop(&s);
 		if (n->data != table2[i])
 			printf("ERROR: Vous avez un erreur dans la fonction breath first search\n");
