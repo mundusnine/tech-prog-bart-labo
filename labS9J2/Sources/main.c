@@ -75,6 +75,7 @@ int main(int argc, char** argv) {
 
 	AdjMatrix* graph = create_graph(6);
 	
+
 	add_node(graph, "A");//0
 	add_edge(graph, 0, 3, 10);
 	add_edge(graph, 0, 2, 5);

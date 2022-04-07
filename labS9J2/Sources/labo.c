@@ -31,7 +31,7 @@ AdjMatrix* create_graph(size_t max_nodes)
 
 	newGraph->nodes = allocate(sizeof(Node) * max_nodes);
 
-	for (int i = 0; i < max_nodes; i++)
+	for (int i = 0; i < max_nodes; i++) 
 	{
 		newGraph->nodes[i].cost = UINT8_MAX;
 		newGraph->nodes[i].path_from = UINT8_MAX;
@@ -39,11 +39,13 @@ AdjMatrix* create_graph(size_t max_nodes)
 		newGraph->nodes[i].data = NULL;
 	}
 
+	
 	newGraph->adjGraph = allocate(sizeof(int*) * max_nodes);
 	for (int i = 0; i < max_nodes; i++)
 	{
 		newGraph->adjGraph[i] = allocate(sizeof(int) * max_nodes);
 	}
+	
 
 	for (int i = 0; i < max_nodes; i++)
 	{
@@ -52,7 +54,17 @@ AdjMatrix* create_graph(size_t max_nodes)
 			newGraph->adjGraph[i][k] = 0;
 		}
 	}
+	return newGraph;
 }
+
+/*
+Node* n = allocate(sizeof(Node) * max_size) / tableau de Nodes *
+
+Node** n = allocate(sizeof(Node*) * max_size) / tableau de pointeurs ** 
+
+
+sizeof(Node) = grosse taille
+sizeof(Node*) = sizeof(int) = Petite taille 
 
 /*
 * Creer un node, lui attribuer le data et l'ajouter dans la matrice d'adjacence.
@@ -60,7 +72,10 @@ AdjMatrix* create_graph(size_t max_nodes)
 
 void add_node(AdjMatrix* graph, void* data)
 {
-	graph->nodes->data = data;
+
+	graph->nodes[graph->len].data = data;
+
+	graph->len++;
 }
 
 /*
@@ -68,7 +83,7 @@ void add_node(AdjMatrix* graph, void* data)
 */
 void add_edge(AdjMatrix* graph, int fromNode, int toNode, uint8_t cost)
 {
-
+	graph->adjGraph[fromNode][toNode] = cost;
 }
 
 void dijkstra(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* solvedPath)
