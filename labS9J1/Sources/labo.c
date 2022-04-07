@@ -66,7 +66,6 @@ int bfs(Node* root[], void* key, Stack* s)
 	{
 		stack_pop(s);
 	}
-	int nbChemin = 0;
 	Queue* q = allocate(sizeof(Queue));
 	queue_init(q);
 	queue_push(q, root[0]);
@@ -99,9 +98,8 @@ int bfs(Node* root[], void* key, Stack* s)
 		{
 			stack_push(s, n);
 			n = n->revPath->data;
-			nbChemin++;
 		}
 	}
-	return nbChemin;
+	return s->top + 1;
 }
 

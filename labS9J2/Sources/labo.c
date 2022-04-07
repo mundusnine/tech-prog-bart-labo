@@ -56,6 +56,8 @@ void dijkstra(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* sol
 		graph->nodes[i].visited = 0;
 	}
 
+	int good = 0;
+
 	Queue* q = allocate(sizeof(Queue));
 	queue_init(q);
 	queue_push(q, &graph->nodes[startNodeIndex]);
@@ -72,6 +74,7 @@ void dijkstra(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* sol
 		n->visited = 1;
 		if (n == &graph->nodes[endNodeIndex])
 		{
+			good = 1;
 			continue;
 		}
 
@@ -87,6 +90,11 @@ void dijkstra(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* sol
 				}
 			}
 		}
+	}
+
+	if (good == 0)
+	{
+		return NULL;
 	}
 
 	n = &graph->nodes[endNodeIndex];
