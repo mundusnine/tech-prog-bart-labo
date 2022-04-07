@@ -43,6 +43,7 @@ struct Node {
 	uint8_t cost;
 	uint8_t visited;
 	uint8_t path_from;
+	int index;
 };
 
 typedef struct AdjMatrix AdjMatrix;
