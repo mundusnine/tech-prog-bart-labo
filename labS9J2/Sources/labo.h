@@ -31,24 +31,32 @@ void queue_init(Queue* q);
 void queue_push(Queue* q, void* data);
 void* queue_pop(Queue* q);
 
+
 /*
 * Vous devez definir une noeud que vous appelerez Node. Node va avoir une propriete data lui permettant de recevoir de l'information de different type. 
 * Node a aussi une propriete  uint8_t cost qui va contenir le cout pour atteindre ce noeud,  une propriete de type uint8_t nommer visited et
 * une propriete de type uint8_t nommer path_from. Cette derniere, sera utiliser pour rebrousser chemin.
 */
 
+typedef struct Node Node;
+struct Node
+{
+	void* data;
+	uint8_t cost;
+	uint8_t visited;
+	uint8_t path_from;
+};
+
 typedef struct AdjMatrix AdjMatrix;
 
 struct AdjMatrix {
-	int** adjGraph;// Essentiellement: int[][]
-	Node* nodes;
-	size_t len;
-	size_t max_size;
+	int** adjGraph;// Essentiellement: int[][] //defini le cout entre 2 node, ex: [1][3] = 1 -> le chemin de la node 1 vers la node 3 coute 1.
+	Node* nodes; // un tab de nodes que le tableaux contient.
+	size_t len; //combien de nodes la matrix contient présentement.
+	size_t max_size; //quantité maximale de nodes dans la matrix.
 };
 
-
-
-
+int GetNodeIdx(AdjMatrix* graph, Node* nPtr);
 
 /*
 * Creer une matrice d'adjacence. Mettre len a 0. Mettre max_size a max_nodes.
