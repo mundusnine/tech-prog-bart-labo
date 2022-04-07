@@ -152,7 +152,8 @@ int main(int argc, char** argv) {
 	add_adjacent_node(list[0], list[1]);
 
 	list[1]->len = 0;
-	nodes_visited = bfs(list, "F",&s);
+	bfs(list, "F",&s);
+	nodes_visited = s.top;
 	for (int i = 0; i < nodes_visited+1; ++i) {
 		Node* n = stack_pop(&s);
 		if (n->data != table[i])
@@ -171,11 +172,6 @@ int main(int argc, char** argv) {
 	add_adjacent_node(list[0], list[4]);
 
 	nodes_visited2 = bfs(list, "F", &s);
-	for (int i = 0; i < nodes_visited+1; ++i) {
-		Node* n = stack_pop(&s);
-		if (n->data != table[i])
-			printf("ERROR: Vous avez un erreur dans la fonction breath first search\n");
-	}
 
 	if (nodes_visited == 2 && nodes_visited2 == 3) {
 		printf("Vous avez potentiellement bien programmer la fonction breath first search\n");
