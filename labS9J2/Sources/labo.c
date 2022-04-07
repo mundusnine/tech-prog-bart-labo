@@ -102,7 +102,7 @@ void dijkstra(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* sol
 				{
 					queue_push(pathQ, &graph->nodes[i]);
 					queue_push(pathQNum, i);
-					graph->nodes[i].cost = cost;//THIS
+					graph->nodes[i].cost = cost;
 					graph->nodes[i].path_from = currentIndex;
 				}
 			}
