@@ -69,22 +69,22 @@ void build_groups(AdjMatrix* graph)
 	Queue* pathQNum = allocate(sizeof(Queue));
 	queue_init(pathQ);
 	queue_init(pathQNum);
-	Node* n = &graph->nodes[0];
-	queue_push(pathQ, n);
-	queue_push(pathQNum, 0);
+	Node* n;
 	int currentIndex = -1;
 
 	int graphGroups = 0;
-
 	for (int i = 0; i < graph->len; i++)
 	{
 		graph->nodes[i].visited = 0;
 	}
-
 	for (int i = 0; i < graph->len; i++)
 	{
 		if (graph->nodes[i].visited == 0)
 		{
+			n = &graph->nodes[i];
+			n->graphGroup = graphGroups;
+			queue_push(pathQ, n);
+			queue_push(pathQNum, i);
 			while (n != NULL)
 			{
 				n = queue_pop(pathQ);
@@ -134,37 +134,40 @@ void astar(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* solved
 	n->cost = 0;
 	int currentIndex = -1;
 	int cost = -1;
-	while (n != NULL)
-	{ 
-		n = queue_pop(pathQ);
-		currentIndex = queue_pop(pathQNum);
-		n->visited = 1;
-		if (n == &graph->nodes[endNodeIndex])
+	if (graph->nodes[startNodeIndex].graphGroup == graph->nodes[endNodeIndex].graphGroup)
+	{
+		while (n != NULL)
 		{
-			break;
-		}
-		for (int i = 0; i < graph->len; i++)
-		{
-			if (!graph->nodes[i].visited && graph->adjGraph[currentIndex][i]>0)
+			n = queue_pop(pathQ);
+			currentIndex = queue_pop(pathQNum);
+			n->visited = 1;
+			if (n == &graph->nodes[endNodeIndex])
 			{
-				double x2 = pow((graph->nodes[i].position.x - graph->nodes[endNodeIndex].position.x),2);
-				double y2 = pow((graph->nodes[i].position.y - graph->nodes[endNodeIndex].position.y),2);
-				cost = graph->nodes[currentIndex].cost + sqrt(x2 + y2) + graph->adjGraph[currentIndex][i];
-				if (graph->nodes[i].cost > cost )
+				break;
+			}
+			for (int i = 0; i < graph->len; i++)
+			{
+				if (!graph->nodes[i].visited && graph->adjGraph[currentIndex][i] > 0)
 				{
-					queue_push(pathQ, &graph->nodes[i]);
-					queue_push(pathQNum, i);
-					graph->nodes[i].cost = cost;
-					graph->nodes[i].path_from = currentIndex;
+					double x2 = pow((graph->nodes[i].position.x - graph->nodes[endNodeIndex].position.x), 2);
+					double y2 = pow((graph->nodes[i].position.y - graph->nodes[endNodeIndex].position.y), 2);
+					cost = graph->nodes[currentIndex].cost + sqrt(x2 + y2) + graph->adjGraph[currentIndex][i];
+					if (graph->nodes[i].cost > cost)
+					{
+						queue_push(pathQ, &graph->nodes[i]);
+						queue_push(pathQNum, i);
+						graph->nodes[i].cost = cost;
+						graph->nodes[i].path_from = currentIndex;
+					}
 				}
 			}
 		}
-	}
-	while (n->path_from != UINT8_MAX)
-	{
+		while (n->path_from != UINT8_MAX)
+		{
+			stack_push(solvedPath, n);
+			int indexPosition = n->path_from;
+			n = &graph->nodes[indexPosition];
+		}
 		stack_push(solvedPath, n);
-		int indexPosition = n->path_from;
-		n = &graph->nodes[indexPosition];
 	}
-	stack_push(solvedPath, n);
 }
