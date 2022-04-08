@@ -54,6 +54,10 @@ void build_groups(AdjMatrix* graph)
 	queue_init(q);
 	for (int i = 0; i < graph->len; i++)
 	{
+		graph->nodes[i].graph_group = 0;
+	}
+	for (int i = 0; i < graph->len; i++)
+	{
 		Node* n = &graph->nodes[i];
 		if (n->graph_group != 0)
 		{
@@ -133,7 +137,7 @@ void astar(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* solved
 		{
 			if ((graph->adjGraph[n->index][i] != 0))
 			{
-				if ((graph->nodes[i].cost == 0 && graph->nodes[i].visited != 1) || graph->nodes[i].cost > graph->adjGraph[n->index][i] + graph->nodes[n->index].cost)
+				if ((graph->nodes[i].cost == 0 && graph->nodes[i].visited != 1) || graph->nodes[i].cost > graph->adjGraph[n->index][i] + graph->nodes[n->index].cost + CheckDistance(&graph->nodes[endNodeIndex], &graph->nodes[i]))
 				{
 					graph->nodes[i].cost = graph->nodes[n->index].cost + graph->adjGraph[n->index][i] + CheckDistance(&graph->nodes[endNodeIndex], &graph->nodes[i]);
 					graph->nodes[i].path_from = n->index;
