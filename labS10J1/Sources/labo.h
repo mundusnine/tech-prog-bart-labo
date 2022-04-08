@@ -66,8 +66,11 @@ struct AdjMatrix {
 };
 
 
-int CheckIfNodesHasAdj(AdjMatrix* graph, int nodeIdx);
-void AdjustGraphGroup(AdjMatrix* graph, int oldGroupId, int newGroupId);
+int NodeIdx(AdjMatrix* graph, Node* node);
+void ChangeIdx(AdjMatrix* graph, int oldIndex, int newIndex);
+int GetSmallerIdxNotVisitedNode(AdjMatrix* graph);
+void ResetNodes(AdjMatrix* graph);
+int GetDistance(AdjMatrix* graph, int fromIndex, int endIndex);
 
 
 /*
