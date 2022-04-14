@@ -65,9 +65,6 @@ struct AdjMatrix {
 };
 
 
-
-
-
 /*
 * Creer une matrice d'adjacence. Mettre len a 0. Mettre max_size a max_nodes. 
 * Allouer de la memoire pour le max de noeud specifier i.e. pour graph->nodes.
@@ -98,5 +95,6 @@ void build_groups(AdjMatrix* graph);
 * Implementer l'algorithme A*. Lorsqu'il n'y a aucun chemin entre deux node, la Stack doit être vide.
 */
 void astar(AdjMatrix* graph,int startNodeIndex, int endNodeIndex, Stack* solvedPath);
+
 
 uint8_t CheckDistance(Node* endNode, Node* currNode);
