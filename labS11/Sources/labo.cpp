@@ -36,3 +36,75 @@ void add_edge(AdjMatrix* graph, int fromNode, int toNode, uint8_t cost)
 {
 	graph->adjGraph[fromNode][toNode] = cost;
 }
+
+long long fibonacci(int n)
+{
+	if (n == 0)
+	{
+		return 0;
+	}
+	else if (n == 1)
+	{
+		return 1;
+	}
+	else
+	{
+		return fibonacci(n - 1) + fibonacci(n - 2);
+	}
+}
+
+long long fibonacci_memoization(int n)
+{
+	static long long fib_cache[75] = { 0 };
+
+	if (n == 0)
+	{
+		return 0;
+	}
+	else if (n == 1)
+	{
+		return 1;
+	}
+	else if (fib_cache[n] != 0)
+	{
+		return fib_cache[n];
+	}
+	else
+	{
+		return fib_cache[n] = fibonacci_memoization(n - 1) + fibonacci_memoization(n - 2);
+	}
+}
+
+long long fibonacci_memoization_malloc(int n)
+{
+	static long long** fib_cache = NULL;
+
+	if (fib_cache == NULL)
+	{
+		fib_cache = (long long**)allocate(sizeof(long long*) * 75);
+
+		for (int i = 0; i < 75; i++)
+		{
+			fib_cache[i] = NULL;
+		}
+	}
+
+	if (n == 0)
+	{
+		return  0;
+	}
+	else if (n == 1)
+	{
+		return 1;
+	}
+	else
+	{
+		if (fib_cache[n] == NULL)
+		{
+			fib_cache[n] = (long long*)malloc(sizeof(long long*));
+			*fib_cache[n] = fibonacci_memoization_malloc(n - 1) + fibonacci_memoization_malloc(n - 2);
+		}
+
+		return *fib_cache[n];
+	}
+}
