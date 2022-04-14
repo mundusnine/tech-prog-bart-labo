@@ -96,7 +96,7 @@ int main(int argc, char** argv) {
 			printf("%lld\n", fibonacci_memoization_malloc(i));
 		count--;
 	}
-
+	/*
 	printf("-----FIRST-----\n");
 	srand(time(NULL));
 	AdjMatrix* graph = create_graph(250);
@@ -167,5 +167,6 @@ int main(int argc, char** argv) {
 		n = (Node*)queue_pop(&tq);
 	}
 	printf("\n");
+	*/
 	return 0;
 }
