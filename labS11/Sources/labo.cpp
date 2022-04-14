@@ -1,7 +1,7 @@
 #include "labo.h"
 #include <math.h>
 #include <stdlib.h>
-
+#define MAX 100
 
 AdjMatrix* create_graph(size_t max_nodes) {
 	AdjMatrix* graph = (AdjMatrix*)allocate(sizeof(AdjMatrix));
@@ -35,4 +35,42 @@ void add_node(AdjMatrix* graph, void* data, Vector2 pos) {
 void add_edge(AdjMatrix* graph, int fromNode, int toNode, uint8_t cost)
 {
 	graph->adjGraph[fromNode][toNode] = cost;
+}
+
+
+long long fibonacci(int n)
+{
+	if (n == 0) return 0; //condition de fin
+	if (n == 1) return 1;
+	return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+long long fibonacci_memoization(int n)
+{
+	static long long tab[MAX] = { 0 };
+	if (n == 0) return 0; //condition de fin
+	if (n == 1) return 1;
+	if (tab[n] != 0) // Regarde si le calcul de fibonacci(n) a deja ete fait
+	{
+		return tab[n]; // S'il est fait retourne le calcule
+	}
+	tab[n] = fibonacci(n - 1) + fibonacci(n - 2);
+	return tab[n];
+}
+
+long long fibonacci_memoization_malloc(int n)
+{
+	static long long** tab = NULL;
+	tab = (long long**)allocate(sizeof(long long*) * MAX);
+	if (tab == NULL)
+	{
+
+	}
+	if (tab[n] != NULL) // Regarde si le calcul de fibonacci(n) a deja ete fait
+	{
+		tab[n] = (long long**)malloc(sizeof(long long*));
+	}
+	tab[n] = fibonacci(n - 1) + fibonacci(n - 2);
+	return tab[n];
+	
 }
