@@ -15,15 +15,15 @@ AdjMatrix* create_graph(size_t max_nodes)
 	graph->len = 0;
 	graph->max_size = max_nodes;
 	graph->nodes = allocate(sizeof(Node) * max_nodes);
-	
+
 	for (int i = 0; i < graph->max_size; i++)
 	{
 		graph->nodes[i].cost = graph->nodes[i].path_from = UINT8_MAX;
 		graph->nodes[i].visited = 0;
 	}
-	
+
 	graph->adjGraph = allocate(sizeof(int*) * max_nodes);
-	
+
 	for (int i = 0; i < max_nodes; i++)
 	{
 		graph->adjGraph[i] = allocate(sizeof(int) * max_nodes);
