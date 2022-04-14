@@ -46,12 +46,13 @@ AdjMatrix* create_graph(size_t max_nodes)
 		newGraph->adjGraph[i] = allocate(sizeof(int) * max_nodes);
 	}
 	
-
+	int test = 0;
 	for (int i = 0; i < max_nodes; i++)
 	{
-		for (int k = 0; i < max_nodes; i++)
+		for (int k = 0; k < max_nodes; k++)
 		{
 			newGraph->adjGraph[i][k] = 0;
+			test++;
 		}
 	}
 	return newGraph;
@@ -87,8 +88,6 @@ void add_edge(AdjMatrix* graph, int fromNode, int toNode, uint8_t cost)
 
 void dijkstra(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* solvedPath)
 {
-	// Similaire au BreathFirstSearch 
-	// Il faut ajouter la notion de coût aux déplacements graph->nodes->cost;
 	while (solvedPath->top != -1) // Vide la stack
 	{
 		stack_pop(solvedPath);
@@ -99,8 +98,13 @@ void dijkstra(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* sol
 	Node* t = &graph->nodes[startNodeIndex];
 	queue_push(q, t);
 	graph->nodes[startNodeIndex].cost = 0; // Coût ini va à 0
+
+	// Variables debug
 	int push = 0;
 	int pop = 0;
+
+	int test = UINT8_MAX;
+
 	while (t != NULL)
 	{
 		t = queue_pop(q);
@@ -110,34 +114,37 @@ void dijkstra(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* sol
 		}
 		t->visited = 1;
 
-		if (t == &graph->nodes[endNodeIndex]) // Continue va skip la prochaine itération de for a la ligne 123
+		if (t == &graph->nodes[endNodeIndex]) // Continue va skip la prochaine itération de for a la ligne 121
 		{
 			continue;
 		}
 
-
-		for (int souffrance = 0; souffrance < graph->len; souffrance++)
+		for (int e = 0; e < graph->len; e++)
 		{
-			for (int douleur = 0; douleur < graph->len; douleur++)
+			for (int j = 0; j < graph->len; j++)
 			{
 				// On regarde si le chemin existe et qu'il est un voisin de la node actuelle
-				if (graph->adjGraph[souffrance][douleur] != 0 && t == &graph->nodes[souffrance]) // Je pars de la bonne place et il y a un chemin
+				if (graph->adjGraph[e][j] != 0 && t == &graph->nodes[e]) // Je pars de la bonne place et il y a un chemin
 				{
-					if ((graph->nodes[douleur].visited == 0 && graph->nodes[douleur].cost == UINT8_MAX) || (graph->nodes[douleur].cost > graph->nodes[souffrance].cost + graph->adjGraph[souffrance][douleur]))
+					if ((graph->nodes[j].visited == 0 && graph->nodes[j].cost == UINT8_MAX) || (graph->nodes[j].cost > graph->nodes[e].cost + graph->adjGraph[e][j]))
 					{
 						// Pousse le prochain voisin non visité dans la queue, update son cost et ajuste son chemin
-						queue_push(q, &graph->nodes[douleur]);
-
-						
-						graph->nodes[douleur].cost = graph->adjGraph[souffrance][douleur] + t->cost;
-						graph->nodes[douleur].path_from = souffrance;
+						queue_push(q, &graph->nodes[j]);
+						printf("QueuePush #%d", push);
+						push++;
+						graph->nodes[j].cost = graph->adjGraph[e][j] + t->cost;
+						graph->nodes[j].path_from = e;
 					}
 				}
 			}
 		}
 	}
 
-	
+
+
+
+
+	// Assigne t a valeur de fin pour remplir la stack dans le bon sens (À travers les rev paths)
 	t = &graph->nodes[endNodeIndex];
 
 	stack_push(solvedPath, t);
