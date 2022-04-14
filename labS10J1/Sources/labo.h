@@ -44,7 +44,7 @@ typedef struct {
 * une propriete de type uint8_t nommer path_from. Cette derniere, sera utiliser pour rebrousser chemin.
 */
 typedef struct Node Node;
-typedef struct Node
+struct Node
 {
 	void* data;
 	Vector2 position;
@@ -98,3 +98,5 @@ void build_groups(AdjMatrix* graph);
 * Implementer l'algorithme A*. Lorsqu'il n'y a aucun chemin entre deux node, la Stack doit être vide.
 */
 void astar(AdjMatrix* graph,int startNodeIndex, int endNodeIndex, Stack* solvedPath);
+
+uint8_t CheckDistance(Node* endNode, Node* currNode);
