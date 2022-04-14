@@ -53,10 +53,12 @@ typedef struct AdjMatrix AdjMatrix;
 
 struct AdjMatrix {
 	int** adjGraph;// Essentiellement: int[][]
-	Node* nodes;
+	Node* nodes; // Tableau de nodes
 	size_t len;
 	size_t max_size;
 };
+
+
 
 
 /*

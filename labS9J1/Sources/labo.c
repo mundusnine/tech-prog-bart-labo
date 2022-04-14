@@ -106,7 +106,7 @@ Pour programmer cet algorithme, vous avez besoins d'une file/queue,
 */
 int bfs(Node* root[], void* key, Stack* s) // Queue first in first out ***
 {
-	while (s->top != -1)
+	while (s->top != -1) // Vide la stack
 	{
 		stack_pop(s);
 	}

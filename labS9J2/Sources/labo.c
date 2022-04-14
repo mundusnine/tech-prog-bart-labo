@@ -67,14 +67,13 @@ sizeof(Node) = grosse taille
 sizeof(Node*) = sizeof(int) = Petite taille 
 
 /*
-* Creer un node, lui attribuer le data et l'ajouter dans la matrice d'adjacence.
+ Creer un node, lui attribuer le data et l'ajouter dans la matrice d'adjacence.
 */
 
 void add_node(AdjMatrix* graph, void* data)
 {
 
 	graph->nodes[graph->len].data = data;
-
 	graph->len++;
 }
 
@@ -88,6 +87,63 @@ void add_edge(AdjMatrix* graph, int fromNode, int toNode, uint8_t cost)
 
 void dijkstra(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* solvedPath)
 {
+
 	// Similaire au BreathFirstSearch 
 	// Il faut ajouter la notion de coût aux déplacements graph->nodes->cost;
+	while (solvedPath->top != -1) // Vide la stack
+	{
+		stack_pop(solvedPath);
+	}
+
+	Queue* q = allocate(sizeof(Queue));
+	queue_init(q);
+	Node* t = &graph->nodes[startNodeIndex];
+	queue_push(q, t);
+	graph->nodes[startNodeIndex].cost = 0; // Coût ini va à 0
+	int push = 0;
+	int pop = 0;
+	while (t != NULL)
+	{
+		t = queue_pop(q);
+		t->visited = 1;
+
+		if (t == &graph->nodes[endNodeIndex])
+		{
+			continue;
+		}
+
+
+		for (int souffrance = 0; souffrance < graph->len; souffrance++)
+		{
+			for (int douleur = 0; douleur < graph->len; douleur++)
+			{
+				// On regarde si le chemin existe et qu'il est un voisin de la node actuelle
+				if (graph->adjGraph[souffrance][douleur] != 0 && t == &graph->nodes[souffrance]) // Je pars de la bonne place et il y a un chemin
+				{
+					if ((graph->nodes[douleur].visited == 0 && graph->nodes[douleur].cost == UINT8_MAX) || (graph->nodes[douleur].cost > graph->nodes[souffrance].cost + graph->adjGraph[souffrance][douleur]))
+					{
+						// Pousse le prochain voisin non visité dans la queue, update son cost et ajuste son chemin
+						queue_push(q, &graph->nodes[douleur]);
+
+						
+						graph->nodes[douleur].cost = graph->adjGraph[souffrance][douleur] + t->cost;
+						graph->nodes[douleur].path_from = souffrance;
+					}
+				}
+			}
+		}
+	}
+
+	
+	t = &graph->nodes[endNodeIndex];
+
+	stack_push(solvedPath, t);
+	while (t != &graph->nodes[startNodeIndex])
+	{
+		t = &graph->nodes[t->path_from];
+		stack_push(solvedPath, t);
+	}
+	//stack_push(solvedPath, t);
+
+	
 }
