@@ -59,6 +59,7 @@ void* queue_pop(Queue* q) {
 		q->count++;
 		return temp->data;
 	}
+	return NULL;
 }
 
 #define HEAP_SIZE 1024 * 2048

@@ -60,6 +60,7 @@ typedef struct {
 	void* data;
 	uint8_t path_from;
 	uint8_t visited;
+	uint8_t index;
 } Node;
 typedef struct AdjMatrix AdjMatrix;
 
@@ -97,3 +98,7 @@ void build_groups(AdjMatrix* graph);
 * Utiliser OPTICK_EVENT(); pour enregistrer la fonction dans le profiler
 */
 void astar(AdjMatrix* graph,int startNodeIndex, int endNodeIndex, Stack* solvedPath);
+
+void ResetGroup(uint8_t lastGroup, uint8_t newGroup, AdjMatrix* graph);
+
+uint8_t CheckDistance(Node* endNode, Node* currNode);
