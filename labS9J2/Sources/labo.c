@@ -99,24 +99,21 @@ void dijkstra(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* sol
 	queue_push(q, t);
 	graph->nodes[startNodeIndex].cost = 0; // Coût ini va à 0
 
-	// Variables debug
-	int push = 0;
-	int pop = 0;
-
-	int test = UINT8_MAX;
 
 	while (t != NULL)
 	{
 		t = queue_pop(q);
 		if (t == NULL)
 		{
+			continuer:
 			break;
 		}
 		t->visited = 1;
 
-		if (t == &graph->nodes[endNodeIndex]) // Continue va skip la prochaine itération de for a la ligne 121
+		if (t == &graph->nodes[endNodeIndex]) // Continue va skip la prochaine itération de for a la ligne 117
 		{
-			continue;
+			goto continuer;
+			//continue;
 		}
 
 		for (int e = 0; e < graph->len; e++)
@@ -130,8 +127,6 @@ void dijkstra(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* sol
 					{
 						// Pousse le prochain voisin non visité dans la queue, update son cost et ajuste son chemin
 						queue_push(q, &graph->nodes[j]);
-						printf("QueuePush #%d", push);
-						push++;
 						graph->nodes[j].cost = graph->adjGraph[e][j] + t->cost;
 						graph->nodes[j].path_from = e;
 					}
