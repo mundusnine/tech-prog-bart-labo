@@ -53,11 +53,14 @@ void dijkstra(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* sol
             {
                 if (graph->adjGraph[i][c] > 0 && &graph->nodes[i] == n)
                 {
-
+                    //On regarde s'il a ete changer
                     if (graph->nodes[c].cost != UINT8_MAX)
                     {
+                        //On le met visited
                         graph->nodes[c].visited = 1;
+                        //calcule son cost
                         int cost = graph->nodes[i].cost + graph->adjGraph[i][c];
+                        //si son cout est plus petit on le change
                         if (cost < graph->nodes[c].cost)
                         {
                             graph->nodes[c].cost = cost;
@@ -66,6 +69,7 @@ void dijkstra(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* sol
                     }
                     else
                     {
+                        //s'il n'a pas ete changer on met son cost
                         int cost = graph->nodes[i].cost + graph->adjGraph[i][c];
                         graph->nodes[c].cost = cost;
                         graph->nodes[c].path_from = i;
@@ -76,11 +80,9 @@ void dijkstra(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* sol
                         queue_push(q, &graph->nodes[c]);
                     }
                 }
-                
-                
             }
-            n = queue_pop(q);
         }
+        n = queue_pop(q);
     }
 
     n = &graph->nodes[endNodeIndex];
