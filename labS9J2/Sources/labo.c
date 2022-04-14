@@ -87,7 +87,6 @@ void add_edge(AdjMatrix* graph, int fromNode, int toNode, uint8_t cost)
 
 void dijkstra(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* solvedPath)
 {
-
 	// Similaire au BreathFirstSearch 
 	// Il faut ajouter la notion de coût aux déplacements graph->nodes->cost;
 	while (solvedPath->top != -1) // Vide la stack
@@ -105,9 +104,13 @@ void dijkstra(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* sol
 	while (t != NULL)
 	{
 		t = queue_pop(q);
+		if (t == NULL)
+		{
+			break;
+		}
 		t->visited = 1;
 
-		if (t == &graph->nodes[endNodeIndex])
+		if (t == &graph->nodes[endNodeIndex]) // Continue va skip la prochaine itération de for a la ligne 123
 		{
 			continue;
 		}
@@ -143,7 +146,4 @@ void dijkstra(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* sol
 		t = &graph->nodes[t->path_from];
 		stack_push(solvedPath, t);
 	}
-	//stack_push(solvedPath, t);
-
-	
 }

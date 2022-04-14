@@ -31,7 +31,8 @@ HashTable* create_hashtable(size_t max_size)
 }
 
 /*
-* Implementer la fonction de hashing tel que vu en classe. Retourner l'index
+* Implementer la fonction de hashing tel que vu en classe. 
+Retourner l'index
 */
 size_t hash(char* key, size_t max)
 {
@@ -97,7 +98,6 @@ void* get_value(HashTable* table, char* key)
 	if (table->data[keyPos] != NULL)
 	{
 		return table->data[keyPos];
-
 	}
 	else
 	{
