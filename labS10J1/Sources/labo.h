@@ -38,14 +38,29 @@ typedef struct {
 } Vector2;
 
 /*
-* Vous devez definir une noeud que vous appelerez Node. Node va avoir une propriete data lui permettant de recevoir de l'information de different type. 
+* Vous devez definir une noeud que vous appelerez Node. 
+Node va avoir une propriete data lui permettant de recevoir de l'information de different type. 
 * Pour calculer notre heuristique, Node devra avoir une propriete position de type Vector2.
-* Node a aussi une propriete uint8_t graph_group qui va contenir l'association entre noeud,  uint8_t cost qui va contenir le cout pour atteindre ce noeud,  une propriete de type uint8_t nommer visited et
+* Node a aussi une propriete uint8_t graph_group qui va contenir l'association entre noeud,  
+uint8_t cost qui va contenir le cout pour atteindre ce noeud,  
+une propriete de type uint8_t nommer visited et
 * une propriete de type uint8_t nommer path_from. Cette derniere, sera utiliser pour rebrousser chemin.
 */
 
-typedef struct AdjMatrix AdjMatrix;
+typedef struct Node Node;
+struct Node
+{
+	void* data;
+	Vector2 h;
 
+	uint8_t graph_group;
+	uint8_t cost;
+	uint8_t visited;
+	uint8_t path_from;
+};
+
+
+typedef struct AdjMatrix AdjMatrix;
 struct AdjMatrix {
 	int** adjGraph;// Essentiellement: int[][]
 	Node* nodes;
