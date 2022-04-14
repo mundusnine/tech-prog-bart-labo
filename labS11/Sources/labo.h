@@ -83,17 +83,17 @@ void add_node(AdjMatrix* graph, void* data, Vector2 pos);
 */
 void add_edge(AdjMatrix* graph, int fromNode, int toNode, uint8_t cost);
 
-
-/*
-* Construire les groupes de nodes
-* Utiliser OPTICK_EVENT(); pour enregistrer la fonction dans le profiler
-*/
-void build_groups(AdjMatrix* graph);
-
-/*
-* Aller chercher votre implémentation d'astar. Faire des test de profiling avec votre implémentation. 
-* Essayer de changer le packing de la struct Node et voir si cela a un impact.
-* Essayer d'utiliser la fonction avec build_groups et sans build_groups
-* Utiliser OPTICK_EVENT(); pour enregistrer la fonction dans le profiler
-*/
-void astar(AdjMatrix* graph,int startNodeIndex, int endNodeIndex, Stack* solvedPath);
+//
+///*
+//* Construire les groupes de nodes
+//* Utiliser OPTICK_EVENT(); pour enregistrer la fonction dans le profiler
+//*/
+//void build_groups(AdjMatrix* graph);
+//
+///*
+//* Aller chercher votre implémentation d'astar. Faire des test de profiling avec votre implémentation. 
+//* Essayer de changer le packing de la struct Node et voir si cela a un impact.
+//* Essayer d'utiliser la fonction avec build_groups et sans build_groups
+//* Utiliser OPTICK_EVENT(); pour enregistrer la fonction dans le profiler
+//*/
+//void astar(AdjMatrix* graph,int startNodeIndex, int endNodeIndex, Stack* solvedPath);

@@ -2,6 +2,73 @@
 #include <math.h>
 #include <stdlib.h>
 
+/*
+* Programmer l'algorithme de fibonacci.
+* Faire attention lorsque vous utilisez un type pour une variable qui représente un nombre, int ne dépasse pas 2^31-1 ou 2,147,483,647
+*/
+long long fibonacci(int n)
+{
+	if (n == 1) { return 1; }
+	if (n == 0) { return 0; }
+	return fibonacci_memoization(n - 1) + fibonacci_memoization(n - 2);
+}
+
+
+/*
+* Programmer l'algorithme de fibonacci avec la memoization en utilisant une variable static fib_cache, implémenter dans la fonction. Son type sera long long [].
+* Utiliser OPTICK_EVENT(); pour enregistrer la fonction dans le profiler
+* Faire attention lorsque vous utilisez un type pour une variable qui représente un nombre, int ne dépasse pas 2^31-1 ou 2,147,483,647
+*/
+
+
+long long fibonacci_memoization(int n)
+{
+	static long long tableauFibo[100] = { NULL };
+	if (n == 1) { return 1; }
+	if (n == 0) { return 0; }
+
+	if (tableauFibo[n] != 0)
+	{
+		return tableauFibo[n];
+	}
+
+	tableauFibo[n] = fibonacci_memoization(n - 1) + fibonacci_memoization(n - 2);
+	return tableauFibo[n];
+}
+
+/*
+* Programmer l'algorithme de fibonacci avec la memoization en utilisant une variable static fib_cache, implémenter dans la fonction. Son type sera long long**.
+* Allouer de la memoire pour fib_cache en utilisant allocate. Après avoir trouver un resultat, pour le mettre dans fib_cache, allouer un int* avec malloc puis ajouter le a fib_cache.
+* Utiliser OPTICK_EVENT(); pour enregistrer la fonction dans le profiler
+* Faire attention lorsque vous utilisez un type pour une variable qui représente un nombre, int ne dépasse pas 2^31-1 ou 2,147,483,647.
+*/
+long long fibonacci_memoization_malloc(int n)
+{
+	static long long ** tableauFibo = NULL ;
+	if (tableauFibo == NULL)
+	{
+		tableauFibo = (long long**)allocate(sizeof(long long*)*75);
+		for (int i = 0; i < 75; i++)
+		{
+			tableauFibo[i] = 0;
+		}
+	}
+	if (n == 1) { return 1; }
+	if (n == 0) { return 0; }
+
+	if (tableauFibo[n] != 0)
+	{
+		return *tableauFibo[n];
+	}
+	long long* tempo = (long long*)malloc(sizeof(long long*));
+	*tempo = fibonacci_memoization_malloc(n - 1) + fibonacci_memoization_malloc(n - 2);
+	tableauFibo[n] = tempo;
+	return *tableauFibo[n];
+}
+
+
+
+
 
 AdjMatrix* create_graph(size_t max_nodes) {
 	AdjMatrix* graph = (AdjMatrix*)allocate(sizeof(AdjMatrix));
