@@ -54,7 +54,7 @@ typedef struct {
 } Vector2;
 
 typedef struct {
-	uint8_t cost;
+	int cost;
 	Vector2 position;
 	uint8_t graph_group;
 	void* data;

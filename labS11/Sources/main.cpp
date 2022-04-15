@@ -138,12 +138,12 @@ int main(int argc, char** argv) {
 	// Find first adjacent
 	int i = 0;
 	int y = 0;
-	for (; y < 250; ++y) {
-		for (; i < 250; ++i) {
+	for (; y < graph->len; ++y) {
+		for (; i < graph->len; ++i) {
 			if (graph->nodes[y].graph_group == graph->nodes[i].graph_group && &graph->nodes[y] != &graph->nodes[i])
 				break;
 		}
-		if (i != 250)
+		if (i != graph->len)
 			break;
 	}
 	

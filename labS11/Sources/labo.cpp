@@ -29,7 +29,6 @@
 //
 //void add_node(AdjMatrix* graph, void* data, Vector2 pos) {
 //	Node* n = &graph->nodes[graph->len++];
-//	n->index = graph->len - 1;
 //	n->data = data;
 //	n->position = pos;
 //}
@@ -219,13 +218,18 @@ void astar(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* solved
 		return;
 	}
 
+	if (startNodeIndex < 0 || startNodeIndex >= graph->len || endNodeIndex < 0 || endNodeIndex >= graph->len)
+	{
+		return;
+	}
+
+
 	int good = 0;
 
 	Queue* q = (Queue*)allocate(sizeof(Queue));
 	queue_init(q);
 	queue_push(q, &graph->nodes[startNodeIndex]);
 	Node* n = &graph->nodes[startNodeIndex];
-
 
 	while (n != NULL)
 	{
@@ -260,7 +264,6 @@ void astar(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* solved
 	{
 		return;
 	}
-
 	n = &graph->nodes[endNodeIndex];
 	stack_push(solvedPath, n);
 	while (n != &graph->nodes[startNodeIndex])
@@ -268,6 +271,7 @@ void astar(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* solved
 		n = &graph->nodes[n->path_from];
 		stack_push(solvedPath, n);
 	}
+	
 }
 
 uint8_t CheckDistance(Node* endNode, Node* currNode)
