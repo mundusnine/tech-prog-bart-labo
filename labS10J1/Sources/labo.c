@@ -210,7 +210,7 @@ void astar(AdjMatrix* graph, int startNodeIndex, int endNodeIndex, Stack* solved
 					// Coût node arrivée > coût node depart + coût chemin
 					if ((graph->nodes[j].visited == 0 && graph->nodes[j].cost == UINT8_MAX) || (graph->nodes[j].cost > graph->nodes[e].cost + graph->adjGraph[e][j]))
 					{
-						uint32_t coutPlus = CtoEnd(graph, &graph->nodes[e], &graph->nodes[j]);
+						uint32_t coutPlus = CtoEnd(graph, &graph->nodes[j], &graph->nodes[endNodeIndex]);
 						// Pousse le prochain voisin non visité dans la queue, update son cost et ajuste son chemin
 						queue_push(q, &graph->nodes[j]);
 						graph->nodes[j].cost = graph->adjGraph[e][j] + t->cost + coutPlus;
