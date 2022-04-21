@@ -102,3 +102,7 @@ void build_groups(AdjMatrix* graph);
 * Implementer l'algorithme A*. Lorsqu'il n'y a aucun chemin entre deux node, la Stack doit être vide.
 */
 void astar(AdjMatrix* graph,int startNodeIndex, int endNodeIndex, Stack* solvedPath);
+
+void Resetgraph(AdjMatrix* graph);
+
+uint32_t CtoEnd(AdjMatrix* graph, Node* from, Node* to);
