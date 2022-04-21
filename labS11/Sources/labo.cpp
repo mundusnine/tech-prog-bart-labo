@@ -60,15 +60,15 @@ long long fibonacci_memoization(int n)
 
 long long fibonacci_memoization_malloc(int n)
 {
-	static long long** tab = NULL;
-	tab = (long long**)allocate(sizeof(long long*) * MAX);
+	static long long* tab = NULL;
+	tab = (long long*)allocate(sizeof(long long*) * MAX);
 	if (tab == NULL)
 	{
 
 	}
-	if (tab[n] != NULL) // Regarde si le calcul de fibonacci(n) a deja ete fait
+	if (tab[n] != NULL)
 	{
-		tab[n] = (long long**)malloc(sizeof(long long*));
+		tab[n] = (long long)malloc(sizeof(long long*));
 	}
 	tab[n] = fibonacci(n - 1) + fibonacci(n - 2);
 	return tab[n];
