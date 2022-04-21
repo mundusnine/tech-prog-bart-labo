@@ -87,20 +87,31 @@ long long fibonacci_memoization_malloc(int n)
 		return n;
 	}
 
-	static 	long long ** tab = NULL;
+	static 	long long ** tab = NULL; // Creation tableau de pointeurs long long de 100 pos
 	if (tab == NULL)
 	{
 		tab = (long long**)allocate(sizeof(long long*) * 100);
 	}
 
 
-	long long* rslt = (long long*)malloc(sizeof(long long*));
-	*rslt = fibonacci_memoization_malloc(n - 1) + fibonacci_memoization_malloc(n - 2);
-	tab[n] = rslt;
+	long long* rslt = (long long*)malloc(sizeof(long long*)); // Creation d'un pointeur long long
+	*rslt = fibonacci_memoization_malloc(n - 1) + fibonacci_memoization_malloc(n - 2); // Assignation au déréférencement du pointeur
+	tab[n] = rslt; // On pousse l'adresse dans la table.
 
 
 	return *rslt;
 }
+/*
+	L'idée ici est que l'on crée un tableau de pointeurs de 100 positions.
+	Par la suite, on insère des pointeurs qui eux, pointent dans des endroits non-linéaires dans la donnée.
+	Cela va venir ralentir le système considérablement.
+*/
+
+
+
+
+
+
 
 /*
 * Construire les groupes de nodes
