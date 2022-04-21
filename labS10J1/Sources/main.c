@@ -175,7 +175,7 @@ int main(int argc, char** argv) {
 	printf("-----SECOND-----\n");
 	build_groups(graph);
 	astar(graph, 0, 6, &s);
-	if (s.top != -1) {
+	if (s.top != -1 || graph->nodes[0].graph_group == graph->nodes[6].graph_group) {
 		printf("La Stack n'est pas vide mais il n'y a pas de chemin entre A et G.\nTu as potentiellement un probleme avec ta fonction build_groups\n");
 	}
 	else {
